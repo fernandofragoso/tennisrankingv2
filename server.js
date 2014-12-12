@@ -16,12 +16,6 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-app.get('/', function(req,res){
-	res.sendFile(__dirname + '/public/index.html');
-});
-
-app.use("/public", express.static(path.join(__dirname, 'public')));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', require('./routes/api'));

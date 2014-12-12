@@ -13,18 +13,6 @@ mongoose.connect('mongodb://localhost/tennisapi', function(err){
 	}
 });
 
-//ADD ITEM
-// var Player = mongoose.model('Player', { name: String, points: Number});
-
-// var fernando = new Player({name: "Fernando", points: 32});
-// fernando.save(function(err){
-// 	if(err){
-// 		console.log("Erro Salvando");
-// 	} else {
-// 		console.log("Salvo");
-// 	}
-// });
-
 //ROUTES
 router.get('/', function(req, res){
 	res.send('Tennis API!');
