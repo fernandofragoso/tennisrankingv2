@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="RankingApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Ranking</title>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<script src="js/angular.min.js"></script>
+		<script src="controller.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+</head>
+
+	<body ng-controller="RankingController">
+
+			 <div class="panel panel-default">
+
+				<div class="panel-heading">
+					<h4>Ranking</h4>
+				</div>
+				<div class="panel-body">
+
+					<table class="table table-striped table-hover">
+
+						<tr class="h5">
+							<td width="5%"> </td>
+							<td>Jogador</td>
+							<td align="center" width="10%">Jogos</td>
+							<td align="center" width="10%">Pontos</td>
+						</tr>
+						
+						<tr ng-class="(($index+1)<5) ? 'success' : 'danger'" ng-repeat="player in playerList | orderBy:['-points','name']" ng-click="filterPlayerMatches(player.id)">
+							<td align="center"><strong>{{$index+1}}</strong></td>
+							<td>
+								<a href="">{{player.name}}</a>
+								
+							</td>
+							<td align="center">{{getPlayedMatches(player.id)}}</td>
+							<td align="center">{{player.points}}</td>
+						</tr>
+
+					</table>
+
+				</div>
+				
+			</div>
+
+			<div class="panel panel-default">
+				
+				<div id="matches" class="panel-heading">
+					<h4>{{selectedPlayer.name}}</h4>
+				</div>
+				<div class="panel-body">
+					
+					<table class="table table-condensed" style="margin-bottom:5px" ng-repeat="match in playerMatchList | orderBy:'id'" 
+						 ng-init="fullMatch = getFullMatch(match.id)" 
+						 ng-class="(match.victory) ? 'list-group-item-success' : (match.score1==match.score2) ? 'list-group-item-custom' : 'list-group-item-danger'">
+						
+						<tr>
+							<td width="60%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
+								<span ng-class="(match.victory) ? 'label-success' : (match.score1==match.score2) ? 'label-default' : 'label-danger'" 
+								class="label">{{fullMatch.score1}}</span>
+								{{fullMatch.player1}}
+							</td>
+							<td width="40%" align="right" style="vertical-align:middle">
+								<span class="label label-default">{{fullMatch.games1[0]}}</span>
+								<span class="label label-default">{{fullMatch.games1[1]}}</span>
+								<span class="label label-default">{{fullMatch.games1[2]}}</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="60%" style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
+								<span ng-class="(match.victory) ? 'label-success' : (match.score1==match.score2) ? 'label-default' : 'label-danger'" 
+								class="label">{{fullMatch.score2}}</span>
+								{{fullMatch.player2}}
+							</td>
+							<td width="40%" align="right" style="vertical-align:middle">
+								<span class="label label-default">{{fullMatch.games2[0]}}</span>
+								<span class="label label-default">{{fullMatch.games2[1]}}</span>
+								<span class="label label-default">{{fullMatch.games2[2]}}</span>
+							</td>
+						</tr>
+						
+					</table>
+				</div>
+
+			</div>
+
+		
+
+	</body>
+</html>

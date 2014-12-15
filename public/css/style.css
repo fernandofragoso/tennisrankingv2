@@ -1,0 +1,33 @@
+.player-selected {
+	font-weight: bold;
+}
+.center-middle {
+	vertical-align: middle;
+}
+.player-details {
+	color: #999999;
+	font-style: italic;
+	font-size: 10px;
+}
+.list-group-item-custom {
+  color: #999999;
+  background-color: #eeeeee;
+}
+a.list-group-item-custom {
+  color: #cccccc;
+}
+a.list-group-item-custom .list-group-item-heading {
+  color: inherit;
+}
+a.list-group-item-custom:hover,
+a.list-group-item-custom:focus {
+  color: #cccccc;
+  background-color: #c4e3f3;
+}
+a.list-group-item-custom.active,
+a.list-group-item-custom.active:hover,
+a.list-group-item-custom.active:focus {
+  color: #fff;
+  background-color: #cccccc;
+  border-color: #cccccc;
+}

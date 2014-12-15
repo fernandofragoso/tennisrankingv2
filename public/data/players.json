@@ -1,0 +1,82 @@
+[
+	{
+		"id": 1,
+		"name": "Fernando Fragoso",
+		"email": "fernandofragoso@gmail.com",
+		"phone": "8848-2529",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 2,
+		"name": "Pedro Duarte",
+		"email": "pedrocpi@hotmail.com",
+		"phone": "9218-6199",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 3,
+		"name": "Ricardo Vasconcelos",
+		"email": "ricardovasc@gmail.com",
+		"phone": "8891-0255",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 4,
+		"name": "Luiz Henrique",
+		"email": "lluizhcs@gmail.com",
+		"phone": "8839-0437",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 5,
+		"name": "Emmanuel Costa",
+		"email": "",
+		"phone": "9587-0444",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 6,
+		"name": "João Costa",
+		"email": "joao@costanordeste.com.br",
+		"phone": "8773-0054",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 7,
+		"name": "Thiago Vasconcelos",
+		"email": "tgouveia91@hotmail.com",
+		"phone": "8838-4281",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 8,
+		"name": "Adalberto Guerra",
+		"email": "",
+		"phone": "8662-3164",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 9,
+		"name": "Bruno Sette",
+		"email": "brunosette@gmail.com",
+		"phone": "8254-9030",
+		"points": 0,
+		"matches": []
+	},
+	{
+		"id": 10,
+		"name": "Victor Cruz",
+		"email": "victorazevedocruz@gmail.com",
+		"phone": "9992-3703",
+		"points": 0,
+		"matches": []
+	}
+	]
