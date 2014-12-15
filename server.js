@@ -16,6 +16,9 @@ app.all('*', function(req, res, next) {
   next();
 });
 
+//BRAGA WIN
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', require('./routes/api'));

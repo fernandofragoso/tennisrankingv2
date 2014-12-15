@@ -1,12 +1,14 @@
 //DEPENDENCIES
 var mongoose = require('mongoose');
 
-//MODEL
-var PlayerModel = mongoose.model('Player', { 
-	id: Number,
+//SCHEMA
+var schema = new mongoose.Schema({ 
 	name: String, 
-	points: Number
+	phone: String,
+	points: Number,
+	matches: [],
+	tournaments: []
 });
 
-//Exports
-module.exports = PlayerModel;
+//EXPORTS
+module.exports = mongoose.model('Player', schema);
