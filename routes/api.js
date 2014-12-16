@@ -5,13 +5,15 @@ var mongoose = require('mongoose');
 
 //MODELS
 var Player = require('../models/player');
+var Tournament = require('../models/tournament');
+var Match = require('../models/match');
 
 //CONNECTION
 mongoose.connect('mongodb://localhost/tennisapi', function(err){
 	if(err){
 		console.log("Erro no DB");
 	}
-	//populateDB();
+	// populateDB();
 });
 
 //ROUTES
@@ -26,38 +28,52 @@ router.route('/players')
 			if(err){
 				res.send(err);
 			} else {
-				var players = rows;
-
-				for(player in players){
-
-				}
-
 				res.json(rows);
 			}
 		});
 	})
 	.post(function(req, res){
-		var model = new Player();
-		model.id = req.body.id;
-		model.name = req.body.name;
-		model.phone = req.body.phone;
-		model.points = req.body.points;
+		
 
-		model.save(function(err){
+		console.log(req.body);
+
+		var player = JSON.stringify(req.body);
+
+		Player.create(player, function(err){
 			if(err){
-				res.send(err);
-			} else {
-				res.json({message: 'Player inserted'});
+				console.log(err);
 			}
 		});
+
+		// model.save(function(err){
+		// 	if(err){
+		// 		res.send(err);
+		// 	} else {
+		// 		res.json({message: 'Player inserted'});
+		// 	}
+		// });
 	});
 
 router.route('/players/:id')
 	.get(function(req, res){
 		var id = req.params.id;
+		var player;
 		Player.findById(id, function (err, item){
-			res.json(item);
-		})
+			if (err) {
+				console.log(err);
+			} else {
+				player = item.toObject();
+				//GET TOURNAMENTS FROM THIS PLAYER
+				Tournament.find({ "players":id }).find(function(err,rows){
+					if (err){
+						console.log(err);
+					} else {
+						player.tournaments = rows;
+						res.json(player);
+					}
+				});
+			}
+		});
 	})
 	.put(function(req, res){
 		var id = req.params.id;
@@ -92,97 +108,169 @@ router.route('/players/:id')
 		
 	});
 
+//TOURNAMENTS API
+router.route('/tournaments')
+	.get(function(req, res){
+		Tournament.find(function(err,rows){
+			if(err){
+				res.send(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	})
+	.post(function(req, res){
+		var model = new Tournament();
+		model.name = req.body.name;
+		model.running = req.body.running;
+
+		model.save(function(err){
+			if(err){
+				res.send(err);
+			} else {
+				res.json({message: 'Tournament inserted'});
+			}
+		});
+	});
+
+router.route('/tournaments/:id')
+	.get(function(req, res){
+		var id = req.params.id;
+		Tournament.findById(id, function (err, item){
+			if (err){
+				console.log(err);
+			} else {
+				res.json(item);
+			}
+		});
+	})
+	.put(function(req, res){
+		var id = req.params.id;
+		var tournament = req.body;
+		Tournament.update({'_id': id}, tournament, {safe: true}, function(err, result){
+			if (err){
+				res.send(err);
+			} else {
+				res.json(tournament);
+			}
+		});
+	})
+	.delete(function(req, res){
+		var id = req.params.id;
+
+		Tournament.findById(id, function (err, item){
+			if (item){
+				item.remove(function(err){
+					if(err){
+						res.send(err);
+					} else {
+						res.json({message: 'Tournament deleted'});
+					}
+				});
+			} else {
+
+			}
+			
+		});
+		
+	});
 
 //POPULATE DB - PLAYERS
 var populateDB = function(){
 	var players = [
 		{
-		"id": 1,
 		"name": "Fernando Fragoso",
 		"email": "fernandofragoso@gmail.com",
 		"phone": "8848-2529",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 2,
 		"name": "Pedro Duarte",
 		"email": "pedrocpi@hotmail.com",
 		"phone": "9218-6199",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 3,
 		"name": "Ricardo Vasconcelos",
 		"email": "ricardovasc@gmail.com",
 		"phone": "8891-0255",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 4,
 		"name": "Luiz Henrique",
 		"email": "lluizhcs@gmail.com",
 		"phone": "8839-0437",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 5,
 		"name": "Emmanuel Costa",
 		"email": "",
 		"phone": "9587-0444",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 6,
 		"name": "João Costa",
 		"email": "joao@costanordeste.com.br",
 		"phone": "8773-0054",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 7,
 		"name": "Thiago Vasconcelos",
 		"email": "tgouveia91@hotmail.com",
 		"phone": "8838-4281",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 8,
 		"name": "Adalberto Guerra",
 		"email": "",
 		"phone": "8662-3164",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 9,
 		"name": "Bruno Sette",
 		"email": "brunosette@gmail.com",
 		"phone": "8254-9030",
-		"points": 0,
-		"matches": []
+		"points": 0
 	},
 	{
-		"id": 10,
 		"name": "Victor Cruz",
 		"email": "victorazevedocruz@gmail.com",
 		"phone": "9992-3703",
-		"points": 0,
-		"matches": []
+		"points": 0
 	}
 	];
 
-	Player.create(players, function(err){
+	// Player.create(players, function(err){
+	// 	if(err){
+	// 		console.log(err);
+	// 	}
+	// });
+
+	var tournaments = [
+		{
+			"name":"Ranking 2014",
+			"running":false,
+			"players":[
+				"54908024bf00e1ce19a2a36e",
+				"54908024bf00e1ce19a2a36f",
+				"54908024bf00e1ce19a2a370",
+				"54908024bf00e1ce19a2a371",
+				"54908024bf00e1ce19a2a372",
+				"54908024bf00e1ce19a2a373",
+				"54908024bf00e1ce19a2a374",
+				"54908024bf00e1ce19a2a375",
+				"54908024bf00e1ce19a2a376",
+				"54908024bf00e1ce19a2a377"
+			]
+		}
+	];
+
+	Tournament.create(tournaments, function(err){
 		if(err){
 			console.log(err);
 		}
 	});
+
 }
 
 //RETURN

@@ -35,7 +35,7 @@ rankingApp.controller("RankingController", function($scope, $http){
 		});
 	});
 
-	$scope.selectedPlayer = {__id:0,name:"Selecione um jogador"};
+	$scope.selectedPlayer = {_id:0,name:"Selecione um jogador"};
 	$scope.playerMatchList = [];
 	
 	//FILTER MATCHES PER PLAYER
@@ -77,7 +77,7 @@ rankingApp.controller("RankingController", function($scope, $http){
 		
 		var points = 0;
 		
-		if (match.player1 == player.__id){
+		if (match.player1 == player._id){
 			
 			if (match.score1 == match.score2) {
 				return 0;
@@ -89,7 +89,7 @@ rankingApp.controller("RankingController", function($scope, $http){
 			}
 			points += match.score1;
 			
-		} else if (match.player2 == player.__id) {
+		} else if (match.player2 == player._id) {
 			
 			if (match.score1 == match.score2) {
 				return 0;
@@ -117,8 +117,8 @@ rankingApp.controller("RankingController", function($scope, $http){
 					continue;
 				} 
 				
-				if ($scope.matchList[j].player1 == $scope.playerList[i].__id 
-					|| $scope.matchList[j].player2 == $scope.playerList[i].__id){
+				if ($scope.matchList[j].player1 == $scope.playerList[i]._id 
+					|| $scope.matchList[j].player2 == $scope.playerList[i]._id){
 				
 					$scope.playerList[i].points += $scope.calculatePoints($scope.playerList[i],$scope.matchList[j]);
 					$scope.playerList[i].matches.push($scope.matchList[j].id);
@@ -181,39 +181,16 @@ rankingApp.controller("RankingController", function($scope, $http){
 	
 	//FIND PLAYER BY ID
 	$scope.findPlayerById = function(playerId) {
-		
+		console.log("findPlayerById " + playerId);
 		var player;
 		
 		for (var i=0; i<$scope.playerList.length; i++) {
-			if ($scope.playerList[i].__id === playerId) {
+			if ($scope.playerList[i]._id == playerId) {
+				
 				player = $scope.playerList[i];
+				console.log(player);
 				return angular.copy(player);
 			}
-		}
-		
-	};
-	
-	//NEXT PLAYER
-	$scope.nextPlayer = function(){
-		
-		var id = $scope.selectedPlayer.__id;
-		
-		if (id+1 > $scope.playerList.length) {
-			$scope.filterPlayerMatches(1);
-		} else {
-			$scope.filterPlayerMatches(id+1);
-		}
-		
-	};
-	
-	//PREVIOUS PLAYER
-	$scope.previousPlayer = function(){
-		
-		var id = $scope.selectedPlayer.__id;
-		if (id-1 < 1) {
-			$scope.filterPlayerMatches($scope.playerList.length);
-		} else {
-			$scope.filterPlayerMatches(id-1);			
 		}
 		
 	};

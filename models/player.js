@@ -1,13 +1,12 @@
 //DEPENDENCIES
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 //SCHEMA
-var schema = new mongoose.Schema({ 
+var schema = new Schema({ 
 	name: String, 
 	phone: String,
-	points: Number,
-	matches: [],
-	tournaments: []
+	points: Number
 });
 
 //EXPORTS

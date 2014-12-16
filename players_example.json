@@ -1,0 +1,72 @@
+[
+    {
+        "_id": "54908024bf00e1ce19a2a36e",
+        "name": "Fernando Fragoso",
+        "phone": "8848-2529",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a36f",
+        "name": "Pedro Duarte",
+        "phone": "9218-6199",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a370",
+        "name": "Ricardo Vasconcelos",
+        "phone": "8891-0255",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a371",
+        "name": "Luiz Henrique",
+        "phone": "8839-0437",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a372",
+        "name": "Emmanuel Costa",
+        "phone": "9587-0444",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a373",
+        "name": "João Costa",
+        "phone": "8773-0054",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a374",
+        "name": "Thiago Vasconcelos",
+        "phone": "8838-4281",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a375",
+        "name": "Adalberto Guerra",
+        "phone": "8662-3164",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a376",
+        "name": "Bruno Sette",
+        "phone": "8254-9030",
+        "points": 0,
+        "__v": 0
+    },
+    {
+        "_id": "54908024bf00e1ce19a2a377",
+        "name": "Victor Cruz",
+        "phone": "9992-3703",
+        "points": 0,
+        "__v": 0
+    }
+]
