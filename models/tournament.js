@@ -6,22 +6,7 @@ var Schema = mongoose.Schema;
 var schema = new Schema({ 
 	name: String,
 	running: Boolean,
-	players: [ { type: Schema.ObjectId } ],
-	matches: [
-		{ 
-			tourn_id: Schema.ObjectId,
-			p1_id: Schema.ObjectId,
-			p2_id: Schema.ObjectId,
-			round: { type: String, enum: ["RR", "R32", "R16", "R8", "Q", "S", "F"] },
-			score: {
-				set_p1: Number,
-				set_p2: Number,
-				games: [ { game_p1: Number, game_p2: Number } ],
-				wo: Boolean
-			},
-			date: Date
-		}
-	]
+	players: [ { type: Schema.ObjectId } ]
 });
 
 //EXPORTS

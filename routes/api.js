@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost/tennisapi', function(err){
 	if(err){
 		console.log("Erro no DB");
 	}
-	// populateDB();
+	populateDB();
 });
 
 //ROUTES
@@ -33,25 +33,20 @@ router.route('/players')
 		});
 	})
 	.post(function(req, res){
-		
+		var model = new Player();
 
-		console.log(req.body);
+		model.name = req.body.name;
+		model.phone = req.body.phone;
+		model.phone = req.body.email;
+		model.points = req.body.points;
 
-		var player = JSON.stringify(req.body);
-
-		Player.create(player, function(err){
+		model.save(function(err){
 			if(err){
-				console.log(err);
+				res.send(err);
+			} else {
+				res.json({message: 'Player inserted'});
 			}
 		});
-
-		// model.save(function(err){
-		// 	if(err){
-		// 		res.send(err);
-		// 	} else {
-		// 		res.json({message: 'Player inserted'});
-		// 	}
-		// });
 	});
 
 router.route('/players/:id')
@@ -69,6 +64,19 @@ router.route('/players/:id')
 						console.log(err);
 					} else {
 						player.tournaments = rows;
+
+						for (tournament in player.tournaments) {
+							Match.find({ $or : [{ "p1_id" : id },{ "p2_id" : id }] })
+								.find(function(err,rows){
+									if (err) {
+										console.log(err);
+									} else {
+										console.log(rows);
+										tournament.matches = JSON.stringify(rows);
+									}
+								});
+						}
+
 						res.json(player);
 					}
 				});
@@ -121,8 +129,11 @@ router.route('/tournaments')
 	})
 	.post(function(req, res){
 		var model = new Tournament();
+
 		model.name = req.body.name;
 		model.running = req.body.running;
+		model.players = req.body.players;
+		model.matches = req.body.matches;
 
 		model.save(function(err){
 			if(err){
