@@ -5,6 +5,7 @@
 		<title>Ranking</title>
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<script src="js/angular.min.js"></script>
+		<script src="js/angular-resource.min.js"></script>
 		<script src="controller.js"></script>
 		<link rel="stylesheet" href="css/style.css">
 </head>
@@ -27,6 +28,12 @@
 							<td align="center" width="10%">Pontos</td>
 						</tr>
 						
+						<tr id="loadingplayers" ng-hide="listLoaded">
+							<td colspan="4" align="center">
+								<img src="img/ajax-loader.gif">
+							</td>
+						</tr>
+
 						<tr ng-class="(($index+1)<5) ? 'success' : 'danger'" ng-repeat="player in playerList | orderBy:['-points','name']" ng-click="filterPlayerMatches(player._id)">
 							<td align="center"><strong>{{$index+1}}</strong></td>
 							<td>
@@ -49,32 +56,37 @@
 				</div>
 				<div class="panel-body">
 					
-					<table class="table table-condensed" style="margin-bottom:5px" ng-repeat="match in playerMatchList | orderBy:'id'" 
-						 ng-init="fullMatch = getFullMatch(match.id)" 
-						 ng-class="(match.victory) ? 'list-group-item-success' : (match.score1==match.score2) ? 'list-group-item-custom' : 'list-group-item-danger'">
+					<table class="table table-condensed" style="margin-bottom:5px" 
+						ng-repeat="match in playerMatchList | orderBy:['-tourn_id','_id']" 
+						ng-init="checkTournament(match)"
+						ng-class="(match.victory) ? 'list-group-item-success' : (match.score.set_p1==match.score.set_p2) ? 'list-group-item-custom' : 'list-group-item-danger'">
 						
+						<tr ng-hide="match.sameTournament">
+							<td colspan="3" style="background:#FFF;color:#000">
+								 <strong>Torneio:</strong> {{getTournamentName(match.tourn_id)}}
+							</td>
 						<tr>
+						<tr>
+							<td rowspan="2" style="text-align:center;vertical-align:middle">
+								{{match.round}}
+							</td>
 							<td width="60%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
-								<span ng-class="(match.victory) ? 'label-success' : (match.score1==match.score2) ? 'label-default' : 'label-danger'" 
-								class="label">{{fullMatch.score1}}</span>
-								{{fullMatch.player1}}
+								<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
+								class="label">{{match.score.set_p1}}</span>
+								{{getPlayerName(match.p1_id)}}
 							</td>
 							<td width="40%" align="right" style="vertical-align:middle">
-								<span class="label label-default">{{fullMatch.games1[0]}}</span>
-								<span class="label label-default">{{fullMatch.games1[1]}}</span>
-								<span class="label label-default">{{fullMatch.games1[2]}}</span>
+								<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p1}}</span>
 							</td>
 						</tr>
 						<tr>
 							<td width="60%" style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
-								<span ng-class="(match.victory) ? 'label-success' : (match.score1==match.score2) ? 'label-default' : 'label-danger'" 
-								class="label">{{fullMatch.score2}}</span>
-								{{fullMatch.player2}}
+								<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
+								class="label">{{match.score.set_p2}}</span>
+								{{getPlayerName(match.p2_id)}}
 							</td>
 							<td width="40%" align="right" style="vertical-align:middle">
-								<span class="label label-default">{{fullMatch.games2[0]}}</span>
-								<span class="label label-default">{{fullMatch.games2[1]}}</span>
-								<span class="label label-default">{{fullMatch.games2[2]}}</span>
+								<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p2}}</span>
 							</td>
 						</tr>
 						

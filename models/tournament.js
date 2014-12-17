@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var schema = new Schema({ 
 	name: String,
 	running: Boolean,
-	players: [ { type: Schema.ObjectId } ]
+	players: [ { type: Schema.ObjectId } ],
+	matches: []
 });
 
 //EXPORTS

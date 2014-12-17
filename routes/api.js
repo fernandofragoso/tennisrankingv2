@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost/tennisapi', function(err){
 	if(err){
 		console.log("Erro no DB");
 	}
-	populateDB();
+	// populateDB();
 });
 
 //ROUTES
@@ -59,25 +59,20 @@ router.route('/players/:id')
 			} else {
 				player = item.toObject();
 				//GET TOURNAMENTS FROM THIS PLAYER
-				Tournament.find({ "players":id }).find(function(err,rows){
+				Tournament.find({ "players":id }, function(err,rows){
 					if (err){
 						console.log(err);
 					} else {
 						player.tournaments = rows;
-
-						for (tournament in player.tournaments) {
-							Match.find({ $or : [{ "p1_id" : id },{ "p2_id" : id }] })
-								.find(function(err,rows){
-									if (err) {
-										console.log(err);
-									} else {
-										console.log(rows);
-										tournament.matches = JSON.stringify(rows);
-									}
-								});
-						}
-
-						res.json(player);
+						//GET MATCHES FROM THIS PLAYER
+						Match.find({ $or : [{ "p1_id" : id },{ "p2_id" : id }] }, function(err,rows){
+							if (err) {
+								console.log(err);
+							} else {
+								player.matches = rows;
+								res.json(player);
+							}
+						});
 					}
 				});
 			}
@@ -151,7 +146,18 @@ router.route('/tournaments/:id')
 			if (err){
 				console.log(err);
 			} else {
-				res.json(item);
+				tournament = item.toObject();
+				//GET MATCHES FROM THIS TOURNAMENT
+				Match.find({ "tourn_id":id }).find(function(err,rows){
+					if(err){
+						console.log(err);
+					} else {
+						tournament.matches = rows;
+						res.json(tournament);
+					}
+					
+				});
+				
 			}
 		});
 	})
@@ -176,6 +182,77 @@ router.route('/tournaments/:id')
 						res.send(err);
 					} else {
 						res.json({message: 'Tournament deleted'});
+					}
+				});
+			} else {
+
+			}
+			
+		});
+		
+	});
+
+//MATCHES API
+router.route('/matches')
+	.get(function(req, res){
+		Match.find(function(err,rows){
+			if(err){
+				res.send(err);
+			} else {
+				res.json(rows);
+			}
+		});
+	})
+	.post(function(req, res){
+		var model = new Match();
+
+		model.tourn_id = req.body.tourn_id;
+		model.p1_id = req.body.p1_id;
+		model.p2_id = req.body.p2_id;
+		model.round = req.body.round;
+		model.score = req.body.score;
+
+		model.save(function(err){
+			if(err){
+				res.send(err);
+			} else {
+				res.json({message: 'Match inserted'});
+			}
+		});
+	});
+
+router.route('/matches/:id')
+	.get(function(req, res){
+		var id = req.params.id;
+		Match.findById(id, function (err, item){
+			if (err){
+				console.log(err);
+			} else {
+				res.json(item);
+			}
+		});
+	})
+	.put(function(req, res){
+		var id = req.params.id;
+		var match = req.body;
+		Match.update({'_id': id}, match, {safe: true}, function(err, result){
+			if (err){
+				res.send(err);
+			} else {
+				res.json(match);
+			}
+		});
+	})
+	.delete(function(req, res){
+		var id = req.params.id;
+
+		Match.findById(id, function (err, item){
+			if (item){
+				item.remove(function(err){
+					if(err){
+						res.send(err);
+					} else {
+						res.json({message: 'Match deleted'});
 					}
 				});
 			} else {

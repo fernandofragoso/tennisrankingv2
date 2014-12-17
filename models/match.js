@@ -13,8 +13,7 @@ var schema = new Schema({
 		set_p2: Number,
 		games: [ { game_p1: Number, game_p2: Number } ],
 		wo: Boolean
-	},
-	date: Date
+	}
 });
 
 //EXPORTS

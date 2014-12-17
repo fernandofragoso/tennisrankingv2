@@ -1,19 +1,23 @@
-var rankingApp = angular.module("RankingApp", []);
+var rankingApp = angular.module("RankingApp", ['ngResource']);
 
-rankingApp.controller("RankingController", function($scope, $http){
+rankingApp.controller("RankingController", function($scope, $resource){
 	
+	//$RESOURCE CONFIGURATION
+	var Player = $resource('http://localhost:3000/api/players/:id', {id:'@_id'});
+
+	var Tournament = $resource('http://localhost:3000/api/tournaments/:id', {id:'@_id'});
+
+	//VARIABLES
 	$scope.playerList = [];
+	$scope.tournList = [];
 	$scope.matchList = [];
-	$scope.isLoaded = false;
-	
-	//HTTP REQUEST - GET JSON
-	// $http.get("data/players.json").success(function(dataPlayer){
-		// $scope.playerList = dataPlayer;
-		// $http.get("data/matches.json").success(function(dataMatch){
-			// $scope.matchList = dataMatch;
-			// $scope.updateRanking();
-		// });
-	// });
+	$scope.listLoaded = false;
+	$scope.playerLoaded = false;
+	$scope.selectedPlayer = {_id:0,name:"Selecione um jogador"};
+	$scope.playerMatchList = [];
+
+	$scope.tempTournId = "";
+	$scope.sameTournament = false;
 
 	//HTTP REQUEST - GET JSON (FROM DROPBOX)
 	// $http.get("https://dl.dropboxusercontent.com/u/1113919/tennisranking/data/players.json").success(function(dataPlayer){
@@ -25,47 +29,58 @@ rankingApp.controller("RankingController", function($scope, $http){
 	// 	});
 	// });
 
-	//HTTP REQUEST - GET JSON (FROM DROPBOX)
-	$http.get("http://localhost:3000/api/players").success(function(dataPlayer){
-		$scope.playerList = dataPlayer;
-		$scope.isLoaded = true;
-		$http.get("https://dl.dropboxusercontent.com/u/1113919/tennisranking/data/matches.json").success(function(dataMatch){
-			$scope.matchList = dataMatch;
-			$scope.updateRanking();
+	//HTTP REQUEST - GET PLAYERS FROM API
+	// $http.get("http://localhost:3000/api/players").success(function(dataPlayer){
+	// 	$scope.playerList = dataPlayer;
+	// 	$scope.playersLoaded = true;
+	// });
+
+	//GET PLAYER AND TOURNAMENT LIST - USING $RESOURCE
+	Player.query(function(data){
+		$scope.playerList = data;
+		Tournament.query(function(data){
+			$scope.tournList = data;
+			$scope.listLoaded = true;
 		});
 	});
-
-	$scope.selectedPlayer = {_id:0,name:"Selecione um jogador"};
-	$scope.playerMatchList = [];
 	
 	//FILTER MATCHES PER PLAYER
 	$scope.filterPlayerMatches = function(playerId){
-		
-		$scope.selectedPlayer = $scope.findPlayerById(playerId);
-		$scope.playerMatchList = [];
-		
-		for (var i=0; i < $scope.matchList.length; i++) {
-			if ($scope.matchList[i].player1 == playerId) {
+
+		Player.get({id:playerId}, function(data){
+			$scope.selectedPlayer = data;
+
+			$scope.playerMatchList = $scope.selectedPlayer.matches;
+			
+			$scope.tempTournId = "";
+
+			for (var i=0; i < $scope.playerMatchList.length; i++) {
+			if ($scope.playerMatchList[i].p1_id == playerId) {
 				
-				if ($scope.matchList[i].score1 > $scope.matchList[i].score2){
-					$scope.matchList[i].victory = true;
+				if ($scope.playerMatchList[i].score.set_p1 > $scope.playerMatchList[i].score.set_p2){
+					$scope.playerMatchList[i].victory = true;
 				} else {
-					$scope.matchList[i].victory = false;
+					$scope.playerMatchList[i].victory = false;
 				}
-				$scope.playerMatchList.push($scope.matchList[i]);
 				
 			}
-			if ($scope.matchList[i].player2 == playerId){
+			if ($scope.playerMatchList[i].p2_id == playerId){
 				
-				if ($scope.matchList[i].score2 > $scope.matchList[i].score1){
-					$scope.matchList[i].victory = true;
+				if ($scope.playerMatchList[i].score.set_p2 > $scope.playerMatchList[i].score.set_p1){
+					$scope.playerMatchList[i].victory = true;
 				} else {
-					$scope.matchList[i].victory = false;
+					$scope.playerMatchList[i].victory = false;
 				}
-				$scope.playerMatchList.push($scope.matchList[i]);
 				
 			}
+
+			$scope.playerLoaded = true;
 		}
+
+		});
+
+		
+		
 		
 		element_to_scroll_to = document.getElementById('matches');
 		element_to_scroll_to.scrollIntoView();
@@ -192,6 +207,48 @@ rankingApp.controller("RankingController", function($scope, $http){
 				return angular.copy(player);
 			}
 		}
+		
+	};
+
+	//GET PLAYER NAME
+	$scope.getPlayerName = function(playerId) {
+		var playerName = "";
+		
+		for (var i=0; i<$scope.playerList.length; i++) {
+			if ($scope.playerList[i]._id == playerId) {
+				
+				playerName = $scope.playerList[i].name;
+				return playerName;
+			}
+		}
+		
+	};
+
+	//GET TOURNAMENT NAME
+	$scope.getTournamentName = function(tournId) {
+		var tournamentName = "";
+		
+		for (var i=0; i<$scope.playerList.length; i++) {
+			if ($scope.tournList[i]._id == tournId) {
+				
+				tournamentName = $scope.tournList[i].name;
+				return tournamentName;
+			}
+		}
+		
+	};
+
+	//GET TOURNAMENT NAME
+	$scope.checkTournament = function(match) {
+		
+		console.log("checkTournament(" + match.tourn_id + ") - tempTournId = " + $scope.tempTournId);
+
+		if($scope.tempTournId == match.tourn_id){
+			match.sameTournament = true;
+		} else {
+			match.sameTournament = false;
+		}
+		$scope.tempTournId = match.tourn_id;
 		
 	};
 	
