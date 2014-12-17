@@ -3,9 +3,9 @@ var rankingApp = angular.module("RankingApp", ['ngResource']);
 rankingApp.controller("RankingController", function($scope, $resource){
 	
 	//$RESOURCE CONFIGURATION
-	var Player = $resource('http://localhost:3000/api/players/:id', {id:'@_id'});
+	var Player = $resource('https://tenisranking.herokuapp.com/api/players/:id', {id:'@_id'});
 
-	var Tournament = $resource('http://localhost:3000/api/tournaments/:id', {id:'@_id'});
+	var Tournament = $resource('https://tenisranking.herokuapp.com/api/tournaments/:id', {id:'@_id'});
 
 	//VARIABLES
 	$scope.playerList = [];
