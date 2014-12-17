@@ -9,12 +9,14 @@ var Tournament = require('../models/tournament');
 var Match = require('../models/match');
 
 //CONNECTION
-mongoose.connect('mongodb://localhost/tennisapi', function(err){
-	if(err){
-		console.log("Erro no DB");
-	}
-	// populateDB();
-});
+//mongoose.connect('mongodb://localhost/tennisapi', function(err){
+mongoose.connect('mongodb://heroku_app32612022:1aep7n66hoodpnpdsr4fpoi3g0@ds027741.mongolab.com:27741/heroku_app32612022', 
+	function(err){
+		if(err){
+			console.log("Erro no DB");
+		}
+		// populateDB();
+	});
 
 //ROUTES
 router.get('/', function(req, res){
