@@ -355,11 +355,11 @@ var populateDB = function(){
 		}
 	];
 
-	Tournament.create(tournaments, function(err){
-		if(err){
-			console.log(err);
-		}
-	});
+	// Tournament.create(tournaments, function(err){
+	// 	if(err){
+	// 		console.log(err);
+	// 	}
+	// });
 
 }
 
