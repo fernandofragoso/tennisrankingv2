@@ -1,6 +1,5 @@
 var rankingApp = angular
-	.module("RankingApp", ['ngResource'])
-	.config();
+	.module("RankingApp", ['ngResource']);
 
 rankingApp.controller("RankingController", function($scope, $resource){
 	
