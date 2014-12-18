@@ -41,7 +41,7 @@ router.route('/players')
 	});
 
 router.route('/players/:id')
-	.get(auth, function(req, res){
+	.get(function(req, res){
 		var id = req.params.id;
 		var player;
 		Player.findById(id, function (err, item){

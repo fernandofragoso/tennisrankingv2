@@ -1,7 +1,16 @@
 var rankingApp = angular
-	.module("RankingApp", ['ngResource']);
+	.module("RankingApp", ['ngRoute','ngResource'])
+	.config(['$routeProvider', function($routeProvider){
+		$routeProvider.
+			when("/login",{templateUrl:'partials/login.html',controller:'LoginController'}).
+			otherwise({redirectTo:'/'});
+	}]);
 
-rankingApp.controller("RankingController", function($scope, $resource){
+rankingApp.controller("LoginController",['$scope', function($scope){
+
+}]);
+
+rankingApp.controller("RankingController",['$scope','$resource', function($scope, $resource){
 	
 	//$RESOURCE CONFIGURATION
 	var Player = $resource('/api/players/:id', {id:'@_id'});
@@ -250,4 +259,4 @@ rankingApp.controller("RankingController", function($scope, $resource){
 		
 	};
 	
-}); 
+}]); 
