@@ -1,22 +1,11 @@
 //DEPENDENCIES
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 
 //MODELS
 var Player = require('../models/player');
 var Tournament = require('../models/tournament');
 var Match = require('../models/match');
-
-//CONNECTION
-//mongoose.connect('mongodb://localhost/tennisapi', function(err){
-mongoose.connect('mongodb://heroku_app32612022:1aep7n66hoodpnpdsr4fpoi3g0@ds027741.mongolab.com:27741/heroku_app32612022', 
-	function(err){
-		if(err){
-			console.log("######## SEM CONEXÃO COM O BANCO DE DADOS!! ########");
-		}
-		// populateDB();
-	});
 
 //ROUTES
 router.get('/', function(req, res){
@@ -52,7 +41,7 @@ router.route('/players')
 	});
 
 router.route('/players/:id')
-	.get(function(req, res){
+	.get( function(req, res){
 		var id = req.params.id;
 		var player;
 		Player.findById(id, function (err, item){

@@ -1,4 +1,6 @@
-var rankingApp = angular.module("RankingApp", ['ngResource']);
+var rankingApp = angular
+	.module("RankingApp", ['ngResource'])
+	.config();
 
 rankingApp.controller("RankingController", function($scope, $resource){
 	
@@ -78,9 +80,6 @@ rankingApp.controller("RankingController", function($scope, $resource){
 		}
 
 		});
-
-		
-		
 		
 		element_to_scroll_to = document.getElementById('matches');
 		element_to_scroll_to.scrollIntoView();
