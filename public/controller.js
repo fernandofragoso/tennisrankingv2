@@ -12,7 +12,7 @@ rankingApp.controller("LoginController",['$scope','$http', function($scope, $htt
 	//SHOW MODAL
 	$('#loginmodal').modal('show');
 
-	var submit = function(){
+	$scope.submit = function(){
 
 		$http.post('/adm/login').success(function(data){
 			alert(data);
@@ -28,7 +28,7 @@ rankingApp.controller("PlayerController",['$scope', function($scope){
 	//SHOW MODAL
 	$('#playermodal').modal('show');
 
-	var submit = function(){
+	$scope.submit = function(){
 
 		this.player.points = 0;
 		$scope.Player.save(this.player, function(data){
