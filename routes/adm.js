@@ -30,12 +30,17 @@ passport.deserializeUser(function(user, done) {
 });
 
 //ROUTES
-router.get('/', auth, function(req, res){
-	res.send('ADM ACCESS!');
+router.get('/', passport.authenticate('local', { successRedirect: '/success',
+													   failureRedirect: '/#/login',
+													   failureFlash: false }));
+
+router.get('/loggedin', function(req,res){
+	res.send(req.isAuthenticated() ? req.user : '0');
 });
 
+
 router.post('/login', passport.authenticate('local', { successRedirect: '/success',
-													   failureRedirect: '/erro',
+													   failureRedirect: '/#/login',
 													   failureFlash: false }));
 
 //RETURN

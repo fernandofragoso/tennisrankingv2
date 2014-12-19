@@ -1,0 +1,34 @@
+<div id="playermodal" ng-controller="PlayerController" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginmodal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Adicionar Jogador</h4>
+      </div>
+      <div class="modal-body">
+        
+      <form name="formplayers" role="form" novalidate>
+  		    <div class="form-group">
+  		        <label>Nome:</label>
+  		        <input ng-model="player.name" type="text" class="form-control" name="name" required/>
+  		    </div>
+  		    <div class="form-group">
+  		        <label>Email:</label>
+  		        <input ng-model="player.email" type="text" class="form-control" name="email" required/>
+  		    </div>
+          <div class="form-group">
+              <label>Telefone:</label>
+              <input ng-model="player.phone" type="text" class="form-control" name="phone" required/>
+          </div>
+
+  		</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" 
+          ng-disabled="formplayers.$invalid" ng-click="submit()" data-dismiss="modal">Ok</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

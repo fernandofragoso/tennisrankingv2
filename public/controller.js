@@ -3,19 +3,47 @@ var rankingApp = angular
 	.config(['$routeProvider', function($routeProvider){
 		$routeProvider.
 			when("/login",{templateUrl:'partials/login.html',controller:'LoginController'}).
+			when("/players",{templateUrl:'partials/players.html',controller:'PlayerController'}).
 			otherwise({redirectTo:'/'});
 	}]);
 
-rankingApp.controller("LoginController",['$scope', function($scope){
+rankingApp.controller("LoginController",['$scope','$http', function($scope, $http){
+
+	//SHOW MODAL
+	$('#loginmodal').modal('show');
+
+	var submit = function(){
+
+		$http.post('/adm/login').success(function(data){
+			alert(data);
+		}).error(function(data){
+			alert(data);
+		});
+	}
+
+}]);
+
+rankingApp.controller("PlayerController",['$scope', function($scope){
+
+	//SHOW MODAL
+	$('#playermodal').modal('show');
+
+	var submit = function(){
+
+		this.player.points = 0;
+		$scope.Player.save(this.player, function(data){
+			//alert(JSON.stringify(data));
+			//$scope.$apply();
+		});
+	}
 
 }]);
 
 rankingApp.controller("RankingController",['$scope','$resource', function($scope, $resource){
 	
 	//$RESOURCE CONFIGURATION
-	var Player = $resource('/api/players/:id', {id:'@_id'});
-
-	var Tournament = $resource('/api/tournaments/:id', {id:'@_id'});
+	$scope.Player = $resource('/api/players/:id', {id:'@_id'});
+	$scope.Tournament = $resource('/api/tournaments/:id', {id:'@_id'});
 
 	//VARIABLES
 	$scope.playerList = [];
@@ -46,9 +74,9 @@ rankingApp.controller("RankingController",['$scope','$resource', function($scope
 	// });
 
 	//GET PLAYER AND TOURNAMENT LIST - USING $RESOURCE
-	Player.query(function(data){
+	$scope.Player.query(function(data){
 		$scope.playerList = data;
-		Tournament.query(function(data){
+		$scope.Tournament.query(function(data){
 			$scope.tournList = data;
 			$scope.listLoaded = true;
 		});
@@ -57,7 +85,7 @@ rankingApp.controller("RankingController",['$scope','$resource', function($scope
 	//FILTER MATCHES PER PLAYER
 	$scope.filterPlayerMatches = function(playerId){
 
-		Player.get({id:playerId}, function(data){
+		$scope.Player.get({id:playerId}, function(data){
 			$scope.selectedPlayer = data;
 
 			$scope.playerMatchList = $scope.selectedPlayer.matches;
