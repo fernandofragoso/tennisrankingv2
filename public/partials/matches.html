@@ -9,6 +9,11 @@
         
       <form name="formmatches" role="form" novalidate>
   		    <div class="form-group">
+  		        <label>Torneio:</label>
+              {{getTournamentName(tournId)}}
+  		        
+  		    </div>
+  		    <div class="form-group">
   		        <label>Jogador 1:</label>
               <select class="form-control" ng-model="match.p1_id" name="p1_id">
                 <option ng-repeat="player in playerList | orderBy:['name']" value="{{player.id}}">{{player.name}}</option>

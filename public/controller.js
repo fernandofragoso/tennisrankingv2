@@ -5,11 +5,12 @@ var rankingApp = angular
 			when("/login",{templateUrl:'partials/login.html',controller:'LoginController'}).
 			when("/players",{templateUrl:'partials/players.html',controller:'PlayerController'}).
 			when("/matches",{templateUrl:'partials/matches.html',controller:'MatchController'}).
+			when("/matches/:tournId",{templateUrl:'partials/matches.html',controller:'MatchController'}).
 			otherwise({redirectTo:'/'});
 	}]);
 
 // rankingApp.factory('Data', function(){
-	
+
 // });
 
 rankingApp.controller("LoginController",['$scope','$http', function($scope, $http){
@@ -31,7 +32,7 @@ rankingApp.controller("LoginController",['$scope','$http', function($scope, $htt
 
 }]);
 
-rankingApp.controller("PlayerController",['$scope','$window', function($scope, $window){
+rankingApp.controller("PlayerController",['$scope','$window','$routeParams', function($scope, $window, $routeParams){
 
 	//SHOW MODAL
 	$('#playermodal').modal('show');
@@ -39,20 +40,20 @@ rankingApp.controller("PlayerController",['$scope','$window', function($scope, $
 	$('#playermodal').on('hidden.bs.modal', function () {
 	    //$window.location.href = '/';
 	    $scope.changeRoute('/#/');
-	})
+	});
 
 	$scope.submit = function(){
 
 		this.player.points = 0;
 		$scope.Player.save(this.player, function(data){
 
-			$window.location.href = '/';
+			$scope.changeRoute('/#/');
 		});
 	}
 
 }]);
 
-rankingApp.controller("MatchController",['$scope','$window', function($scope, $window){
+rankingApp.controller("MatchController",['$scope','$window','$routeParams', function($scope, $window, $routeParams){
 
 	//SHOW MODAL
 	$('#matchmodal').modal('show');
@@ -61,6 +62,8 @@ rankingApp.controller("MatchController",['$scope','$window', function($scope, $w
 	    //$window.location.href = '/';
 	    $scope.changeRoute('/#/');
 	})
+
+	$scope.tournId = $routeParams.tournId;
 
 	$scope.submit = function(){
 
@@ -306,7 +309,7 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 
 	//GET TOURNAMENT NAME
 	$scope.getTournamentName = function(tournId) {
-		var tournamentName = "";
+		var tournamentName = "Tournament not found";
 		
 		for (var i=0; i<$scope.playerList.length; i++) {
 			if ($scope.tournList[i]._id == tournId) {

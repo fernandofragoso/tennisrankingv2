@@ -117,7 +117,7 @@
 
 						<tr class="h4">
 							<td>Torneio</td>
-							<td align="center" width="10%">Em andamento</td>
+							<td align="center" width="10%"></td>
 						</tr>
 						
 						<tr id="loadingtournaments" ng-hide="listLoaded">
@@ -130,7 +130,11 @@
 							<td>
 								{{tourn.name}}
 							</td>
-							<td align="center">{{tourn.running}}</td>
+							<td align="right">
+								<a ng-href="/#/matches/{{tourn._id}}" class="btn btn-primary btn-xs">
+									Adicionar partida
+								</a>
+							</td>
 						</tr>
 
 					</table>
