@@ -36,7 +36,7 @@ mongoose.connect("mongodb://localhost/tennisapi",
 // mongoose.connect('mongodb://heroku_app32612022:1aep7n66hoodpnpdsr4fpoi3g0@ds027741.mongolab.com:27741/heroku_app32612022',
 	function(err){
 		if(err){
-			console.log("########XX SEM CONEXÃO COM O BANCO DE DADOS!! XX########");
+			console.log("######## NO DB CONNECTION ########");
 		}
 		// populateDB();
 	});

@@ -4,13 +4,21 @@ var rankingApp = angular
 		$routeProvider.
 			when("/login",{templateUrl:'partials/login.html',controller:'LoginController'}).
 			when("/players",{templateUrl:'partials/players.html',controller:'PlayerController'}).
+			when("/matches",{templateUrl:'partials/matches.html',controller:'MatchController'}).
 			otherwise({redirectTo:'/'});
 	}]);
 
+// rankingApp.factory('Data', function(){
+	
+// });
+
 rankingApp.controller("LoginController",['$scope','$http', function($scope, $http){
 
-	//SHOW MODAL
 	$('#loginmodal').modal('show');
+
+	$('#loginmodal').on('hidden.bs.modal', function () {
+	    $window.location.href = '/';
+	})
 
 	$scope.submit = function(){
 
@@ -23,23 +31,50 @@ rankingApp.controller("LoginController",['$scope','$http', function($scope, $htt
 
 }]);
 
-rankingApp.controller("PlayerController",['$scope', function($scope){
+rankingApp.controller("PlayerController",['$scope','$window', function($scope, $window){
 
 	//SHOW MODAL
 	$('#playermodal').modal('show');
+
+	$('#playermodal').on('hidden.bs.modal', function () {
+	    //$window.location.href = '/';
+	    $scope.changeRoute('/#/');
+	})
 
 	$scope.submit = function(){
 
 		this.player.points = 0;
 		$scope.Player.save(this.player, function(data){
-			//alert(JSON.stringify(data));
-			//$scope.$apply();
+
+			$window.location.href = '/';
 		});
 	}
 
 }]);
 
-rankingApp.controller("RankingController",['$scope','$resource', function($scope, $resource){
+rankingApp.controller("MatchController",['$scope','$window', function($scope, $window){
+
+	//SHOW MODAL
+	$('#matchmodal').modal('show');
+
+	$('#matchmodal').on('hidden.bs.modal', function () {
+	    //$window.location.href = '/';
+	    $scope.changeRoute('/#/');
+	})
+
+	$scope.submit = function(){
+
+		// this.player.points = 0;
+		// $scope.Player.save(this.player, function(data){
+
+		// 	$window.location.href = '/';
+		// });
+	}
+
+}]);
+
+
+rankingApp.controller("RankingController",['$scope','$resource', '$location', function($scope, $resource, $location){
 	
 	//$RESOURCE CONFIGURATION
 	$scope.Player = $resource('/api/players/:id', {id:'@_id'});
@@ -82,6 +117,16 @@ rankingApp.controller("RankingController",['$scope','$resource', function($scope
 		});
 	});
 	
+	$scope.changeRoute = function(url, forceReload) {
+        $scope = $scope || angular.element(document).scope();
+        if(forceReload || $scope.$$phase) { // that's right TWO dollar signs: $$phase
+            window.location = url;
+        } else {
+            $location.path(url);
+            $scope.$apply();
+        }
+    };
+
 	//FILTER MATCHES PER PLAYER
 	$scope.filterPlayerMatches = function(playerId){
 
