@@ -46,7 +46,6 @@ rankingApp.controller("PlayerController",['$scope','$window','$routeParams', fun
 
 		this.player.points = 0;
 		$scope.Player.save(this.player, function(data){
-
 			$scope.changeRoute('/#/');
 		});
 	}
@@ -54,6 +53,10 @@ rankingApp.controller("PlayerController",['$scope','$window','$routeParams', fun
 }]);
 
 rankingApp.controller("MatchController",['$scope','$window','$routeParams', function($scope, $window, $routeParams){
+
+	$scope.setsp1 = [];
+	$scope.setsp2 = [];
+	$scope.tournid_test = "TESTE";
 
 	//SHOW MODAL
 	$('#matchmodal').modal('show');
@@ -67,11 +70,145 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 
 	$scope.submit = function(){
 
-		// this.player.points = 0;
-		// $scope.Player.save(this.player, function(data){
+		//INITIALIZE SCORES
+		this.match.score = {};
+		this.match.score.games = [];
+		this.match.score.set_p1 = 0;
+		this.match.score.set_p2 = 0;
 
-		// 	$window.location.href = '/';
-		// });
+		//SET TOURN ID
+		this.match.tourn_id = $scope.tournId;
+
+		//CHECKING WO
+		if ($scope.setsp1[0] == "W") {
+			this.match.score.wo = true;
+			this.match.score.set_p1 = 2;
+			this.match.score.set_p2 = 0;
+			//SET GAMES
+			this.match.score.games[0] = {};
+			this.match.score.games[0].game_p1 = "W";
+			this.match.score.games[0].game_p2 = "O";
+		} else if ($scope.setsp2[0] == "W") {
+			this.match.score.wo = true;
+			this.match.score.set_p1 = 0;
+			this.match.score.set_p2 = 2;
+			//SET GAMES
+			this.match.score.games[0] = {};
+			this.match.score.games[0].game_p1 = "O";
+			this.match.score.games[0].game_p2 = "W";
+		} else {
+			this.match.score.wo = false;
+
+			//COUNTING SCORES
+			if ($scope.setsp1[0]!=$scope.setsp2[0]) {
+				if ($scope.setsp1[0] > $scope.setsp2[0]) {
+					this.match.score.set_p1++;
+				} else {
+					this.match.score.set_p2++;
+				}
+			}
+
+			if ($scope.setsp1[1]!=$scope.setsp2[1]) {
+				if ($scope.setsp1[1] > $scope.setsp2[1]) {
+					this.match.score.set_p1++;
+				} else {
+					this.match.score.set_p2++;
+				}
+			}
+
+			if ($scope.setsp1[2]!=$scope.setsp2[2]) {
+				if (parseInt($scope.setsp1[2]) > parseInt($scope.setsp2[2])) {
+					this.match.score.set_p1++;
+				} else {
+					this.match.score.set_p2++;
+				}
+			}
+
+			//SET GAMES
+			this.match.score.games[0] = {};
+			this.match.score.games[0].game_p1 = $scope.setsp1[0];
+			this.match.score.games[0].game_p2 = $scope.setsp2[0];
+			this.match.score.games[1] = {};
+			this.match.score.games[1].game_p1 = $scope.setsp1[1];
+			this.match.score.games[1].game_p2 = $scope.setsp2[1];
+			if ($scope.setsp1[2]!=$scope.setsp2[2]) {
+				this.match.score.games[2] = {};
+				this.match.score.games[2].game_p1 = $scope.setsp1[2];
+				this.match.score.games[2].game_p2 = $scope.setsp2[2];
+			}
+
+		}
+
+		//CALCULATE POINTS
+		//RR - 10/5
+		//R32 - 10
+		//R16 - 10
+		//R8 - 10
+		//Q - 20
+		//S - 20
+		//F - 50/20
+		// var player1 = $scope.findPlayerById(this.match.p1_id);
+		// var player2 = $scope.findPlayerById(this.match.p2_id);
+		var points_p1 = 0;
+		var points_p2 = 0;
+
+		if (this.match.score.set_p1!=this.match.score.set_p2) {
+
+			switch(this.match.round){
+				case "RR":
+					console.log("RR");
+					if (this.match.score.set_p1>this.match.score.set_p2){
+						points_p1 += 10;
+						if(!this.match.score.wo){
+							points_p2 += 5;
+						}
+					} else {
+						points_p2 += 10;
+						if(!this.match.score.wo){
+							points_p1 += 5;
+						}
+					}
+					console.log(points_p1);
+					console.log(points_p2);
+					break;
+				case "R32":
+				case "R16":
+				case "R8":
+					points_p1 += 10;
+					points_p2 += 10;
+					break;
+				case "Q":
+				case "S":
+					points_p1 += 20;
+					points_p2 += 20;
+					break;
+				case "F":
+					points_p1 += 20;
+					points_p2 += 20;
+					if (this.match.score.set_p1>this.match.score.set_p2){
+						points_p1 += 30;
+					} else {
+						points_p2 += 30;
+					}
+					break;
+			}
+
+			$scope.Player.get({id:this.match.p1_id},function(data){
+				var player1 = data;
+				player1.points += points_p1;
+				$scope.Player.update({ id:player1._id }, player1);
+			});
+			$scope.Player.get({id:this.match.p2_id},function(data){
+				var player2 = data;
+				player2.points += points_p2;
+				$scope.Player.update({ id:player2._id }, player2);
+			});
+
+		}
+		
+		$scope.Match.save(this.match, function(data){
+			//$scope.changeRoute('/#/');
+		});
 	}
 
 }]);
@@ -80,8 +217,9 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 rankingApp.controller("RankingController",['$scope','$resource', '$location', function($scope, $resource, $location){
 	
 	//$RESOURCE CONFIGURATION
-	$scope.Player = $resource('/api/players/:id', {id:'@_id'});
-	$scope.Tournament = $resource('/api/tournaments/:id', {id:'@_id'});
+	$scope.Player = $resource('/api/players/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
+	$scope.Tournament = $resource('/api/tournaments/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
+	$scope.Match = $resource('/api/matches/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
 
 	//VARIABLES
 	$scope.playerList = [];
@@ -94,6 +232,10 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 
 	$scope.tempTournId = "";
 	$scope.sameTournament = false;
+
+	$scope.getCounter = function(num) {
+	    return new Array(num);   
+	}
 
 	//HTTP REQUEST - GET JSON (FROM DROPBOX)
 	// $http.get("https://dl.dropboxusercontent.com/u/1113919/tennisranking/data/players.json").success(function(dataPlayer){
@@ -120,6 +262,14 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 		});
 	});
 	
+	$scope.objectSize = function(obj) {
+	    var size = 0, key;
+	    for (key in obj) {
+	        if (obj.hasOwnProperty(key)) size++;
+	    }
+	    return size;
+	};
+
 	$scope.changeRoute = function(url, forceReload) {
         $scope = $scope || angular.element(document).scope();
         if(forceReload || $scope.$$phase) { // that's right TWO dollar signs: $$phase
@@ -309,7 +459,7 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 
 	//GET TOURNAMENT NAME
 	$scope.getTournamentName = function(tournId) {
-		var tournamentName = "Tournament not found";
+		var tournamentName = "";
 		
 		for (var i=0; i<$scope.playerList.length; i++) {
 			if ($scope.tournList[i]._id == tournId) {

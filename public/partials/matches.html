@@ -11,19 +11,92 @@
   		    <div class="form-group">
   		        <label>Torneio:</label>
               {{getTournamentName(tournId)}}
-  		        
-  		    </div>
-  		    <div class="form-group">
-  		        <label>Jogador 1:</label>
-              <select class="form-control" ng-model="match.p1_id" name="p1_id">
-                <option ng-repeat="player in playerList | orderBy:['name']" value="{{player.id}}">{{player.name}}</option>
-              </select>
-  		    </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>Jogador 1:</label>
+                  <select class="form-control" ng-model="match.p1_id" name="p1_id">
+                    <option ng-repeat="player in playerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <label>Set 1:</label>
+                  <select class="form-control" ng-model="setsp1[0]" name="p1_set1">
+                    <option ng-repeat="i in getCounter(8) track by $index" value="{{$index}}">{{$index}}</option>
+                    <option value="W">W</option>
+                    <option value="O">O</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <label>Set 2:</label>
+                  <select class="form-control" ng-model="setsp1[1]" name="p1_set2">
+                    <option ng-repeat="i in getCounter(8) track by $index" value="{{$index}}">{{$index}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <label>Set 3:</label>
+                  <select class="form-control" ng-model="setsp1[2]" name="p1_set3">
+                    <option ng-repeat="i in getCounter(15) track by $index" value="{{$index}}">{{$index}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label>Jogador 2:</label>
+                  <select class="form-control" ng-model="match.p2_id" name="p2_id">
+                    <option ng-repeat="player in playerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <label>Set 1:</label>
+                  <select class="form-control" ng-model="setsp2[0]" name="p2_set1">
+                    <option ng-repeat="i in getCounter(8) track by $index" value="{{$index}}">{{$index}}</option>
+                    <option value="W">W</option>
+                    <option value="O">O</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <label>Set 2:</label>
+                  <select class="form-control" ng-model="setsp2[1]" name="p2_set2">
+                    <option ng-repeat="i in getCounter(8) track by $index" value="{{$index}}">{{$index}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                  <label>Set 3:</label>
+                  <select class="form-control" ng-model="setsp2[2]" name="p2_set3">
+                    <option ng-repeat="i in getCounter(15) track by $index" value="{{$index}}">{{$index}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+
           <div class="form-group">
-              <label>Jogador 2:</label>
-              <select class="form-control" ng-model="match.p2_id" name="p2_id">
-                <option ng-repeat="player in playerList | orderBy:['name']" value="{{player.id}}">{{player.name}}</option>
-              </select>
+            <label>Round:</label>
+            <select class="form-control" ng-model="match.round" name="p2_id">
+              <option value="RR">RR</option>
+              <option value="R32">R32</option>
+              <option value="R16">R16</option>
+              <option value="R8">R8</option>
+              <option value="Q">Q</option>
+              <option value="S">S</option>
+              <option value="F">F</option>
+            </select>
           </div>
 
   		</form>
