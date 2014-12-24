@@ -13,12 +13,12 @@ var rankingApp = angular
 
 // });
 
-rankingApp.controller("LoginController",['$scope','$http', function($scope, $http){
+rankingApp.controller("LoginController",['$scope','$http','$window', function($scope, $http, $window){
 
 	$('#loginmodal').modal('show');
 
 	$('#loginmodal').on('hidden.bs.modal', function () {
-	    $window.location.href = '/';
+	    $scope.changeRoute('/#/');
 	})
 
 	$scope.submit = function(){
