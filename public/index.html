@@ -83,7 +83,7 @@
 							</td>
 							<td width="70%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
 								<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
-								class="label">{{ (match.score.wo && (match.score.set_p1!=0)) ? "W" : match.score.set_p1 }}</span>
+								class="label">{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
 								{{getPlayerName(match.p1_id)}}
 							</td>
 							<td width="20%" align="right" style="vertical-align:middle">
@@ -93,7 +93,7 @@
 						<tr>
 							<td style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
 								<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
-								class="label">{{ (match.score.wo && (match.score.set_p2!=0)) ? "W" : match.score.set_p2 }}</span>
+								class="label">{{ (match.score.wo) ? ((match.score.set_p2!=0) ? "w" : "O") : match.score.set_p2 }}</span>
 								{{getPlayerName(match.p2_id)}}
 							</td>
 							<td align="right" style="vertical-align:middle">
