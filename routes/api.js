@@ -48,24 +48,28 @@ router.route('/players/:id')
 			if (err) {
 				console.log(err);
 			} else {
-				player = item.toObject();
-				//GET TOURNAMENTS FROM THIS PLAYER
-				Tournament.find({ "players":id }, function(err,rows){
-					if (err){
-						console.log(err);
-					} else {
-						player.tournaments = rows;
-						//GET MATCHES FROM THIS PLAYER
-						Match.find({ $or : [{ "p1_id" : id },{ "p2_id" : id }] }, function(err,rows){
-							if (err) {
-								console.log(err);
-							} else {
-								player.matches = rows;
-								res.json(player);
-							}
-						});
-					}
-				});
+				if (item) {
+					player = item.toObject();
+					//GET TOURNAMENTS FROM THIS PLAYER
+					Tournament.find({ "players":id }, function(err,rows){
+						if (err){
+							console.log(err);
+						} else {
+							player.tournaments = rows;
+							//GET MATCHES FROM THIS PLAYER
+							Match.find({ $or : [{ "p1_id" : id },{ "p2_id" : id }] }, function(err,rows){
+								if (err) {
+									console.log(err);
+								} else {
+									player.matches = rows;
+									res.json(player);
+								}
+							});
+						}
+					});
+				} else {
+					res.send({message: 'Player not found'});
+				}
 			}
 		});
 	})

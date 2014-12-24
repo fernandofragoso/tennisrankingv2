@@ -38,7 +38,6 @@ rankingApp.controller("PlayerController",['$scope','$window','$routeParams', fun
 	$('#playermodal').modal('show');
 
 	$('#playermodal').on('hidden.bs.modal', function () {
-	    //$window.location.href = '/';
 	    $scope.changeRoute('/#/');
 	});
 
@@ -46,7 +45,7 @@ rankingApp.controller("PlayerController",['$scope','$window','$routeParams', fun
 
 		this.player.points = 0;
 		$scope.Player.save(this.player, function(data){
-			$scope.changeRoute('/#/');
+			// $scope.changeRoute('/#/');
 		});
 	}
 
@@ -62,13 +61,15 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 	$('#matchmodal').modal('show');
 
 	$('#matchmodal').on('hidden.bs.modal', function () {
-	    //$window.location.href = '/';
 	    $scope.changeRoute('/#/');
 	})
 
 	$scope.tournId = $routeParams.tournId;
 
 	$scope.submit = function(){
+
+		$scope.p1_id = this.match.p1_id;
+		$scope.p2_id = this.match.p2_id;
 
 		//INITIALIZE SCORES
 		this.match.score = {};
@@ -84,18 +85,10 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 			this.match.score.wo = true;
 			this.match.score.set_p1 = 2;
 			this.match.score.set_p2 = 0;
-			//SET GAMES
-			this.match.score.games[0] = {};
-			this.match.score.games[0].game_p1 = "W";
-			this.match.score.games[0].game_p2 = "O";
 		} else if ($scope.setsp2[0] == "W") {
 			this.match.score.wo = true;
 			this.match.score.set_p1 = 0;
 			this.match.score.set_p2 = 2;
-			//SET GAMES
-			this.match.score.games[0] = {};
-			this.match.score.games[0].game_p1 = "O";
-			this.match.score.games[0].game_p2 = "W";
 		} else {
 			this.match.score.wo = false;
 
@@ -193,13 +186,14 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 					break;
 			}
 
-			$scope.Player.get({id:this.match.p1_id},function(data){
-				var player1 = data;
+			$scope.updatePlayerList(function(){
+
+				var player1 = $scope.findPlayerById($scope.p1_id);
+				var player2 = $scope.findPlayerById($scope.p2_id);
+
 				player1.points += points_p1;
 				$scope.Player.update({ id:player1._id }, player1);
-			});
-			$scope.Player.get({id:this.match.p2_id},function(data){
-				var player2 = data;
+
 				player2.points += points_p2;
 				$scope.Player.update({ id:player2._id }, player2);
 			});
@@ -233,27 +227,6 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 	$scope.tempTournId = "";
 	$scope.sameTournament = false;
 
-	$scope.getCounter = function(num) {
-	    return new Array(num);   
-	}
-
-	//HTTP REQUEST - GET JSON (FROM DROPBOX)
-	// $http.get("https://dl.dropboxusercontent.com/u/1113919/tennisranking/data/players.json").success(function(dataPlayer){
-	// 	$scope.playerList = dataPlayer;
-	// 	$scope.isLoaded = true;
-	// 	$http.get("https://dl.dropboxusercontent.com/u/1113919/tennisranking/data/matches.json").success(function(dataMatch){
-	// 		$scope.matchList = dataMatch;
-	// 		$scope.updateRanking();
-	// 	});
-	// });
-
-	//HTTP REQUEST - GET PLAYERS FROM API
-	// $http.get("http://localhost:3000/api/players").success(function(dataPlayer){
-	// 	$scope.playerList = dataPlayer;
-	// 	$scope.playersLoaded = true;
-	// });
-
-	//GET PLAYER AND TOURNAMENT LIST - USING $RESOURCE
 	$scope.Player.query(function(data){
 		$scope.playerList = data;
 		$scope.Tournament.query(function(data){
@@ -262,6 +235,10 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 		});
 	});
 	
+	$scope.getCounter = function(num) {
+	    return new Array(num);   
+	}
+
 	$scope.objectSize = function(obj) {
 	    var size = 0, key;
 	    for (key in obj) {
@@ -278,6 +255,24 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
             $location.path(url);
             $scope.$apply();
         }
+    };
+
+    $scope.updatePlayerList = function(callback){
+    	$scope.Player.query(function(data){
+			$scope.playerList = data;
+			$scope.Tournament.query(function(data){
+				$scope.tournList = data;
+				callback();
+			});
+		});
+    };
+
+    $scope.getMatchCount = function(playerId){
+    	return 1;
+  //   	$scope.Player.get({id:playerId}, function(data){
+		// 	var player = data;
+		// 	return 1;
+		// });
     };
 
 	//FILTER MATCHES PER PLAYER
@@ -317,65 +312,6 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 		
 		element_to_scroll_to = document.getElementById('matches');
 		element_to_scroll_to.scrollIntoView();
-		
-	};
-	
-	//CALCULATE RANKING POINTS
-	$scope.calculatePoints = function(player, match){
-		
-		var points = 0;
-		
-		if (match.player1 == player._id){
-			
-			if (match.score1 == match.score2) {
-				return 0;
-			}	
-			else if (match.score1 > match.score2) {
-				points += 3;
-			} else {
-				points += 1;
-			}
-			points += match.score1;
-			
-		} else if (match.player2 == player._id) {
-			
-			if (match.score1 == match.score2) {
-				return 0;
-			}
-			else if (match.score2 > match.score1) {
-				points += 3;
-			} else {
-				points += 1;
-			}
-			points += match.score2;
-			
-		}
-		
-		return points;
-	};
-	
-	//UPDATE RANKING RESULTS
-	$scope.updateRanking = function(){
-		
-		for (var i=0; i < $scope.playerList.length; i++) {
-			
-			for (var j=0; j < $scope.matchList.length; j++) {
-				
-				if ($scope.matchList[j].score1 == undefined) {
-					continue;
-				} 
-				
-				if ($scope.matchList[j].player1 == $scope.playerList[i]._id 
-					|| $scope.matchList[j].player2 == $scope.playerList[i]._id){
-				
-					$scope.playerList[i].points += $scope.calculatePoints($scope.playerList[i],$scope.matchList[j]);
-					$scope.playerList[i].matches.push($scope.matchList[j].id);
-				
-				}
-				
-			};
-			
-		};
 		
 	};
 	

@@ -50,7 +50,7 @@
 							<td>
 								<a href="">{{player.name}}</a>
 							</td>
-							<!-- <td align="center">{{objectSize(player.matches)}}</td> -->
+							<!-- <td align="center">{{getMatchCount(player._id)}}</td> -->
 							<td align="center">{{player.points}}</td>
 						</tr>
 
@@ -73,7 +73,7 @@
 						ng-class="(match.victory) ? 'list-group-item-success' : (match.score.set_p1==match.score.set_p2) ? 'list-group-item-custom' : 'list-group-item-danger'">
 						
 						<tr ng-hide="match.sameTournament">
-							<td colspan="3" style="background:#FFF;color:#000">
+							<td colspan="4" style="background:#FFF;color:#000">
 								 <strong>Torneio:</strong> {{getTournamentName(match.tourn_id)}}
 							</td>
 						<tr>
@@ -81,22 +81,22 @@
 							<td width="5%" rowspan="2" style="text-align:center;vertical-align:middle">
 								{{match.round}}
 							</td>
-							<td width="60%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
+							<td width="75%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
 								<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
 								class="label">{{match.score.set_p1}}</span>
 								{{getPlayerName(match.p1_id)}}
 							</td>
-							<td width="35%" align="right" style="vertical-align:middle">
+							<td width="20%" align="right" style="vertical-align:middle">
 								<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p1}}</span>
 							</td>
 						</tr>
 						<tr>
-							<td width="60%" style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
+							<td style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
 								<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
 								class="label">{{match.score.set_p2}}</span>
 								{{getPlayerName(match.p2_id)}}
 							</td>
-							<td width="35%" align="right" style="vertical-align:middle">
+							<td align="right" style="vertical-align:middle">
 								<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p2}}</span>
 							</td>
 						</tr>
