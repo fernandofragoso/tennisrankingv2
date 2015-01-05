@@ -207,6 +207,30 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 
 }]);
 
+rankingApp.controller("PageController",['$scope', function($scope){
+
+	$scope.showTab = function(num) {
+	    
+		switch(num){
+			case 1:
+				$("#tab_ranking").addClass("active");
+				$("#tab_tournaments").removeClass("active");
+				$("#div_ranking").show();
+				$("#div_tournaments").hide();
+				break;
+			case 2:
+				$("#tab_ranking").removeClass("active");
+				$("#tab_tournaments").addClass("active");
+				$("#div_ranking").hide();
+				$("#div_tournaments").show();
+				break;
+			default:
+				break;
+		}
+
+	}
+
+}]);
 
 rankingApp.controller("RankingController",['$scope','$resource', '$location', function($scope, $resource, $location){
 	
@@ -221,8 +245,11 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 	$scope.matchList = [];
 	$scope.listLoaded = false;
 	$scope.playerLoaded = false;
+	$scope.tournamentLoaded = false;
 	$scope.selectedPlayer = {_id:0,name:"Selecione um jogador"};
+	$scope.selectedTournament = {_id:0,name:"Selecione um torneio"};
 	$scope.playerMatchList = [];
+	$scope.tournamentMatchList = [];
 
 	$scope.tempTournId = "";
 	$scope.sameTournament = false;
@@ -286,31 +313,49 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', fu
 			$scope.tempTournId = "";
 
 			for (var i=0; i < $scope.playerMatchList.length; i++) {
-			if ($scope.playerMatchList[i].p1_id == playerId) {
-				
-				if ($scope.playerMatchList[i].score.set_p1 > $scope.playerMatchList[i].score.set_p2){
-					$scope.playerMatchList[i].victory = true;
-				} else {
-					$scope.playerMatchList[i].victory = false;
+				if ($scope.playerMatchList[i].p1_id == playerId) {
+					
+					if ($scope.playerMatchList[i].score.set_p1 > $scope.playerMatchList[i].score.set_p2){
+						$scope.playerMatchList[i].victory = true;
+					} else {
+						$scope.playerMatchList[i].victory = false;
+					}
+					
 				}
-				
-			}
-			if ($scope.playerMatchList[i].p2_id == playerId){
-				
-				if ($scope.playerMatchList[i].score.set_p2 > $scope.playerMatchList[i].score.set_p1){
-					$scope.playerMatchList[i].victory = true;
-				} else {
-					$scope.playerMatchList[i].victory = false;
+				if ($scope.playerMatchList[i].p2_id == playerId){
+					
+					if ($scope.playerMatchList[i].score.set_p2 > $scope.playerMatchList[i].score.set_p1){
+						$scope.playerMatchList[i].victory = true;
+					} else {
+						$scope.playerMatchList[i].victory = false;
+					}
+					
 				}
+
 				
 			}
 
-			$scope.playerLoaded = true;
-		}
+		$scope.playerLoaded = true;
 
 		});
 		
 		element_to_scroll_to = document.getElementById('matches');
+		element_to_scroll_to.scrollIntoView();
+		
+	};
+
+	//FILTER MATCHES PER PLAYER
+	$scope.filterTournamentMatches = function(tournamentId){
+
+		$scope.Tournament.get({id:tournamentId}, function(data){
+			$scope.selectedTournament = data;
+
+			$scope.tournamentMatchList = $scope.selectedTournament.matches;
+
+			$scope.tournamentLoaded = true;
+		});
+		
+		element_to_scroll_to = document.getElementById('tournmatches');
 		element_to_scroll_to.scrollIntoView();
 		
 	};
