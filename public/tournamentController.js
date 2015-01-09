@@ -7,6 +7,8 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 	//FILTER MATCHES PER TOURNAMENT
 	$scope.filterTournamentMatches = function(tournamentId){
 		console.log("filterTournamentMatches");
+		
+		$scope.clearLists();
 
 		$scope.Tournament.get({id:tournamentId}, function(data){
 			$scope.selectedTournament = data;
@@ -38,6 +40,20 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 
 	}
 
+	//CLEAR LISTS
+	$scope.clearLists = function(){
+		console.log("clearLists");
+
+		while ($scope.tournamentPlayerList.length > 0){
+			$scope.tournamentPlayerList.pop();
+		}
+
+		while ($scope.tournamentMatchList.length > 0){
+			$scope.tournamentMatchList.pop();
+		}
+
+	}
+
 	//UPDATE RANKING RESULTS
 	$scope.updateRanking = function(){
 		
@@ -48,7 +64,6 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 			for (var j=0; j < $scope.tournamentMatchList.length; j++) {
 				
 				if ($scope.tournamentMatchList[j].score == undefined) {
-					console.log("Score undefined");
 					continue;
 				} 
 				
@@ -63,9 +78,6 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 				}
 				
 			};
-
-			console.log("JOGADOR: " + $scope.tournamentPlayerList[i].name);
-			console.log("PONTOS NO TORNEIO: " + $scope.tournamentPlayerList[i].tournamentpoints);
 			
 		};
 		
