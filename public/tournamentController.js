@@ -34,6 +34,23 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 
 		for (var i = 0; i<$scope.playerList.length; i++){
 			if ($scope.selectedTournament.players.indexOf($scope.playerList[i]._id)!=-1){
+				
+				//CHECKS IF TOURNAMENT HAVE GROUPS
+				if($scope.selectedTournament.groups.length > 0){
+
+					console.log("HAVE GROUPS!");
+					
+					//FIND PLAYER GROUP
+					for(var j = 0;j<$scope.selectedTournament.groups.length;j++){
+						console.log("name: " + $scope.selectedTournament.groups[j].groupname);
+						if($scope.selectedTournament.groups[j].players.indexOf($scope.playerList[i]._id)!=-1){
+							$scope.playerList[i].group = $scope.selectedTournament.groups[j].groupname;
+							console.log($scope.playerList[i].name + " - GROUP " + $scope.selectedTournament.groups[j].groupname);
+						}
+					}
+
+				}
+
 				$scope.tournamentPlayerList.push($scope.playerList[i]);
 			}
 		}

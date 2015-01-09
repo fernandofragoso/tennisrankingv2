@@ -78,7 +78,15 @@
 
 						<table class="table table-striped">
 
-							<tr ng-repeat="player in tournamentPlayerList | orderBy:['-tournamentpoints','name']">
+							<tr ng-show="(selectedTournament.groups.length > 0)">
+								<td colspan="3" align="center">
+									<span class="label label-warning">{{selectedTournament.groups[0].groupname}}</span>
+									<span class="label label-success">{{selectedTournament.groups[1].groupname}}</span>
+								</td>
+							</tr>
+							
+							<tr ng-repeat="player in tournamentPlayerList | orderBy:['-tournamentpoints','name']"
+							ng-class="(selectedTournament.groups.length > 0) ? ((player.group == selectedTournament.groups[0].groupname) ? 'warning' : 'success' ): ''">
 								<td align="center" width="5%"><strong>{{$index+1}}</strong></td>
 								<td>
 									{{player.name}}
@@ -86,6 +94,8 @@
 								<!-- <td align="center">{{getMatchCount(player._id)}}</td> -->
 								<td width="10%" align="center">{{player.tournamentpoints}}</td>
 							</tr>
+
+							
 
 						</table>
 						
