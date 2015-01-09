@@ -37,8 +37,6 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 				
 				//CHECKS IF TOURNAMENT HAVE GROUPS
 				if($scope.selectedTournament.groups.length > 0){
-
-					console.log("HAVE GROUPS!");
 					
 					//FIND PLAYER GROUP
 					for(var j = 0;j<$scope.selectedTournament.groups.length;j++){
@@ -49,6 +47,8 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 						}
 					}
 
+				} else {
+					$scope.playerList[i].group = "";
 				}
 
 				$scope.tournamentPlayerList.push($scope.playerList[i]);

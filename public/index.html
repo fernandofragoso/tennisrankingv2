@@ -84,10 +84,10 @@
 									<span class="label label-success">{{selectedTournament.groups[1].groupname}}</span>
 								</td>
 							</tr>
-							
-							<tr ng-repeat="player in tournamentPlayerList | orderBy:['-tournamentpoints','name']"
+
+							<tr ng-repeat="player in tournamentPlayerList | orderBy:['group','-tournamentpoints','name']"
 							ng-class="(selectedTournament.groups.length > 0) ? ((player.group == selectedTournament.groups[0].groupname) ? 'warning' : 'success' ): ''">
-								<td align="center" width="5%"><strong>{{$index+1}}</strong></td>
+								<td align="center" width="5%"><strong>{{($index+1>5 && selectedTournament.groups.length > 0) ? $index+1-5 : $index+1}}</strong></td>
 								<td>
 									{{player.name}}
 								</td>
