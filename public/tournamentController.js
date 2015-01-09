@@ -7,6 +7,7 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 	//FILTER MATCHES PER TOURNAMENT
 	$scope.filterTournamentMatches = function(tournamentId){
 		console.log("filterTournamentMatches");
+		$scope.tournamentLoaded = false;
 		
 		$scope.clearLists();
 
@@ -22,8 +23,8 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 			$scope.tournamentLoaded = true;
 		});
 		
-		element_to_scroll_to = document.getElementById('tournmatches');
-		element_to_scroll_to.scrollIntoView();
+		// element_to_scroll_to = document.getElementById('tournmatches');
+		// element_to_scroll_to.scrollIntoView();
 		
 	};
 
