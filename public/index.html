@@ -10,7 +10,9 @@
 		<script src="js/bootstrap.js"></script>
 		<script src="js/angular-resource.min.js"></script>
 		<script src="js/angular-route.min.js"></script>
-		<script src="controller.js"></script>
+		<script src="pageController.js"></script>
+		<script src="rankingController.js"></script>
+		<script src="tournamentController.js"></script>
 		<link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -31,7 +33,7 @@
 
 					<div class="panel-heading">
 						<img src="img/icon.png" style="width: 55px;height:55px;float:left;margin-right:10px">
-						<h3>Ranking</h3>
+						<h3>Ranking Geral</h3>
 					</div>
 					<div class="panel-body">
 
@@ -117,7 +119,7 @@
 
 			</div>	<!-- END OF RANKING -->
 
-			<div id="div_tournaments" style="display:none;">
+			<div id="div_tournaments" style="display:none;" ng-controller="TournamentController">
 
 			 	<div class="panel panel-default">
 
@@ -164,6 +166,25 @@
 						<h3>{{selectedTournament.name}}</h3>
 					</div>
 					<div class="panel-body">
+
+						<table class="table table-striped">
+							
+							<tr id="loadingplayers" ng-hide="listLoaded">
+								<td colspan="4" align="center">
+									<img src="img/ajax-loader.gif">
+								</td>
+							</tr>
+
+							<tr ng-repeat="player in tournamentPlayerList | orderBy:['-tournamentpoints','name']">
+								<td align="center" width="5%"><strong>{{$index+1}}</strong></td>
+								<td>
+									<a href="">{{player.name}}</a>
+								</td>
+								<!-- <td align="center">{{getMatchCount(player._id)}}</td> -->
+								<td width="10%" align="center">{{player.tournamentpoints}}</td>
+							</tr>
+
+						</table>
 						
 						<table class="table table-condensed list-group-item-custom" style="margin-bottom:5px" 
 							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']">
