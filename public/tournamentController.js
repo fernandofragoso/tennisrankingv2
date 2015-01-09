@@ -37,7 +37,6 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 				$scope.tournamentPlayerList.push($scope.playerList[i]);
 			}
 		}
-		console.log("$scope.tournamentPlayerList.length: " + $scope.tournamentPlayerList.length);
 
 	}
 
@@ -71,10 +70,8 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 				if ($scope.tournamentMatchList[j].p1_id == $scope.tournamentPlayerList[i].id 
 					|| $scope.tournamentMatchList[j].player2 == $scope.tournamentPlayerList[i].id){
 				
-					$scope.tournamentPlayerList[i].tournamentpoints += $scope.calculatePoints($scope.tournamentPlayerList[i],$scope.tournamentMatchList[j]);
-					
-					
-					// $scope.tournamentPlayerList[i].matches.push($scope.tournamentMatchList[j].id);
+					$scope.tournamentPlayerList[i].tournamentpoints += 
+						$scope.calculatePoints($scope.tournamentPlayerList[i],$scope.tournamentMatchList[j]);
 				
 				}
 				

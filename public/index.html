@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>- Ranking -</title>
+		<title>Circuito Alternativo de Tênis</title>
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<script src="js/jquery-1.11.2.js"></script>
@@ -25,7 +25,7 @@
 			<ul class="nav nav-tabs" style="margin-bottom:10px;" ng-controller="PageController">
 				<li id="tab_tournaments" role="presentation" class="active"><a href="#" ng-click="showTab(2)">Torneios</a></li>
 				<li id="tab_ranking" role="presentation"><a href="#" ng-click="showTab(1)">Ranking Geral</a></li>
-				<!-- <li id="tab_tournaments" role="presentation"><a href="http://www.catenis.com.br/blog">Circuito Alternativo de Tenis</a></li> -->
+				<li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a></li>
 			</ul>
 
 			<div id="div_tournaments" ng-controller="TournamentController">
@@ -77,12 +77,6 @@
 					<div class="panel-body">
 
 						<table class="table table-striped">
-							
-							<tr id="loadingplayers" ng-hide="listLoaded">
-								<td colspan="4" align="center">
-									<img src="img/ajax-loader.gif">
-								</td>
-							</tr>
 
 							<tr ng-repeat="player in tournamentPlayerList | orderBy:['-tournamentpoints','name']">
 								<td align="center" width="5%"><strong>{{$index+1}}</strong></td>
@@ -97,12 +91,6 @@
 						
 						<table class="table table-condensed list-group-item-custom" style="margin-bottom:5px" 
 							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']">
-
-							<tr id="loadingmatches" ng-hide="tournamentLoaded">
-								<td colspan="4" align="center">
-									<img src="img/ajax-loader.gif">
-								</td>
-							</tr>
 
 							<tr>
 								<td width="10%" rowspan="2" style="text-align:center;vertical-align:middle">
@@ -190,12 +178,6 @@
 							ng-repeat="match in playerMatchList | orderBy:['-tourn_id','_id']" 
 							ng-init="checkTournament(match)"
 							ng-class="(match.victory) ? 'list-group-item-success' : (match.score.set_p1==match.score.set_p2) ? 'list-group-item-custom' : 'list-group-item-danger'">
-							
-							<tr id="loadingmastches" ng-hide="playerLoaded">
-								<td colspan="4" align="center">
-									<img src="img/ajax-loader.gif">
-								</td>
-							</tr>
 
 							<tr ng-hide="match.sameTournament">
 								<td colspan="4" style="background:#FFF;color:#000">
