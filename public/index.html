@@ -26,7 +26,8 @@
 				<li id="tab_tournaments" role="presentation" class="active"><a href="#" ng-click="showTab(2)">Torneios</a></li>
 				<li id="tab_ranking" role="presentation"><a href="#" ng-click="showTab(1)">Ranking Geral</a></li>
 				<!-- <li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a> -->
-				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right"><a href="/#/">{{session.data.login}} (Logout)</a></li>
+				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right">
+					<a ng-click="logout()" href="#">{{session.data.login}} (Logout)</a></li>
 				<li id="tab_login" ng-hide="(session.data)" role="presentation" class="pull-right"><a href="/#/login">Login</a></li>
 			</ul>
 

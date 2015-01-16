@@ -29,6 +29,11 @@ rankingApp.controller("LoginController",['$scope','$window','$routeParams','Sess
 	    $scope.changeRoute('/#/');
 	})
 
+	$scope.login = function(user){
+		console.log("login");
+		$scope.session.updateSession(user);
+	}
+
 	$scope.submit = function(){
 
 		$scope.User.login({login:this.user.login,password:this.user.password}, function(data){
@@ -37,7 +42,7 @@ rankingApp.controller("LoginController",['$scope','$window','$routeParams','Sess
 				alert("Login/Senha incorretos!");
 			} else {
 				$('#loginmodal').modal('hide');
-				$scope.session.updateSession(data);
+				$scope.login(data);
 			}
 			//alert(JSON.stringify(data));
 		})
@@ -247,6 +252,11 @@ rankingApp.controller("PageController",['$scope', function($scope){
 				break;
 		}
 
+	}
+
+	$scope.logout = function(){
+		console.log("logout");
+		$scope.session.updateSession(null);
 	}
 
 }]);
