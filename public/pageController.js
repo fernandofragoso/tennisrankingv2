@@ -9,11 +9,19 @@ var rankingApp = angular
 			otherwise({redirectTo:'/'});
 	}]);
 
-// rankingApp.factory('Data', function(){
+rankingApp.factory('Session', function(){
+	var Session = {
+		data: {},
+		saveSession: function(){},
+		updateSession: function(user){
+			Session.data = user;
+		}
+	};
+	Session.updateSession(null);
+	return Session;
+});
 
-// });
-
-rankingApp.controller("LoginController",['$scope','$http','$window', function($scope, $http, $window){
+rankingApp.controller("LoginController",['$scope','$window','$routeParams','Session', function($scope, $window, $routeParams, Session){
 
 	$('#loginmodal').modal('show');
 
@@ -23,11 +31,22 @@ rankingApp.controller("LoginController",['$scope','$http','$window', function($s
 
 	$scope.submit = function(){
 
-		$http.post('/adm/login').success(function(data){
-			alert(data);
-		}).error(function(data){
-			alert(data);
-		});
+		$scope.User.login({login:this.user.login,password:this.user.password}, function(data){
+
+			if (data.error) {
+				alert("Login/Senha incorretos!");
+			} else {
+				$('#loginmodal').modal('hide');
+				$scope.session.updateSession(data);
+			}
+			//alert(JSON.stringify(data));
+		})
+
+		// $http.post('/adm/login').success(function(data){
+		// 	alert(data);
+		// }).error(function(data){
+		// 	alert(data);
+		// });
 	}
 
 }]);

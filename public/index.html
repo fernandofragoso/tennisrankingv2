@@ -25,7 +25,9 @@
 			<ul class="nav nav-tabs" style="margin-bottom:10px;" ng-controller="PageController">
 				<li id="tab_tournaments" role="presentation" class="active"><a href="#" ng-click="showTab(2)">Torneios</a></li>
 				<li id="tab_ranking" role="presentation"><a href="#" ng-click="showTab(1)">Ranking Geral</a></li>
-				<li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a></li>
+				<!-- <li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a> -->
+				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right"><a href="/#/">{{session.data.login}} (Logout)</a></li>
+				<li id="tab_login" ng-hide="(session.data)" role="presentation" class="pull-right"><a href="/#/login">Login</a></li>
 			</ul>
 
 			<div id="div_tournaments" ng-controller="TournamentController">
@@ -56,9 +58,9 @@
 									<a href="">{{tourn.name}}</a>
 								</td>
 								<td align="right">
-									<!-- <a ng-href="/#/matches/{{tourn._id}}" class="btn btn-primary btn-xs">
+									<a ng-show="(session.data)" ng-href="/#/matches/{{tourn._id}}" class="btn btn-primary btn-xs">
 										Adicionar partida
-									</a> -->
+									</a>
 								</td>
 							</tr>
 
@@ -149,7 +151,7 @@
 								<th width="5%"> </th>
 								<th>
 									Jogador
-									<!-- <a ng-href="/#/players" class="btn btn-primary btn-xs">Adicionar</a> -->
+									<a ng-href="/#/players" ng-show="(session.data)" class="btn btn-primary btn-xs">Adicionar</a>
 								</th>
 								<!-- <td align="center" width="10%">Jogos</td> -->
 								<th style="text-align:center" align="center" width="10%">Pontos</th>

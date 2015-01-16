@@ -1,11 +1,24 @@
-rankingApp.controller("RankingController",['$scope','$resource', '$location', function($scope, $resource, $location){
+rankingApp.controller("RankingController",['$scope','$resource', '$location', 'Session', function($scope, $resource, $location, Session){
 	
 	//$RESOURCE CONFIGURATION
 	$scope.Player = $resource('/api/players/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
 	$scope.Tournament = $resource('/api/tournaments/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
 	$scope.Match = $resource('/api/matches/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
+	$scope.User = $resource('/adm/login', 
+		null, 
+		{ 'login': {
+			method: 'POST',
+			params: { login: '@login', password: '@password'},
+			isArray: false
+		}
+	});
+
+	//SESSION
+	$scope.session = Session;
 
 	//VARIABLES
+	$scope.sessionUser = null;
+
 	$scope.playerList = [];
 	$scope.tournList = [];
 	$scope.matchList = [];
