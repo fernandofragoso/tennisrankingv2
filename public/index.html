@@ -83,13 +83,13 @@
 
 							<tr ng-show="(selectedTournament.groups.length > 0)">
 								<td colspan="3" align="center">
-									<span class="label label-warning">{{selectedTournament.groups[0].groupname}}</span>
+									<span class="label label-info">{{selectedTournament.groups[0].groupname}}</span>
 									<span class="label label-success">{{selectedTournament.groups[1].groupname}}</span>
 								</td>
 							</tr>
 
 							<tr ng-repeat="player in tournamentPlayerList | orderBy:['group','-tournamentpoints','name']"
-							ng-class="(selectedTournament.groups.length > 0) ? ((player.group == selectedTournament.groups[0].groupname) ? 'warning' : 'success' ): ''">
+							ng-class="(selectedTournament.groups.length > 0) ? ((player.group == selectedTournament.groups[0].groupname) ? 'info' : 'success' ): ''">
 								<td align="center" width="5%"><strong>{{($index+1>5 && selectedTournament.groups.length > 0) ? $index+1-5 : $index+1}}</strong></td>
 								<td>
 									{{player.name}}
@@ -102,15 +102,17 @@
 
 						</table>
 						
-						<table class="table table-condensed list-group-item-custom" style="margin-bottom:5px" 
-							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']">
+						<table class="table table-condensed" style="margin-bottom:5px" 
+							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']"
+							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'"
+							>
 
 							<tr>
 								<td width="10%" rowspan="2" style="text-align:center;vertical-align:middle">
 									{{match.round}}
 								</td>
 								<td width="70%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
-									<span class="label label-default">
+									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
 										{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
 									{{getPlayerName(match.p1_id)}}
 								</td>
@@ -120,7 +122,7 @@
 							</tr>
 							<tr>
 								<td style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
-									<span class="label label-default">
+									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
 										{{ (match.score.wo) ? ((match.score.set_p2!=0) ? "w" : "O") : match.score.set_p2 }}</span>
 									{{getPlayerName(match.p2_id)}}
 								</td>
