@@ -6,7 +6,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<script src="js/jquery-1.11.2.js"></script>
-		<script src="js/angular.min.js"></script>
+		<script src="js/angular.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/angular-resource.min.js"></script>
 		<script src="js/angular-route.min.js"></script>
@@ -23,8 +23,8 @@
 			</div>
 
 			<ul class="nav nav-tabs" style="margin-bottom:10px;" ng-controller="PageController">
-				<li id="tab_tournaments" role="presentation" class="active"><a href="#" ng-click="showTab(2)">Torneios</a></li>
-				<li id="tab_ranking" role="presentation"><a href="#" ng-click="showTab(1)">Ranking Geral</a></li>
+				<li id="tab_tournaments" role="presentation" class="active"><a ng-click="showTab(2)">Torneios</a></li>
+				<li id="tab_ranking" role="presentation"><a ng-click="showTab(1)">Ranking Geral</a></li>
 				<!-- <li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a> -->
 				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right">
 					<a ng-click="logout()" href="#">{{session.data.login}} (Logout)</a></li>
@@ -54,7 +54,7 @@
 								</td>
 							</tr>
 
-							<tr ng-repeat="tourn in tournList | orderBy:'-_id'" ng-click="filterTournamentMatches(tourn._id)">
+							<tr ng-repeat="tourn in tournList | orderBy:'-_id'" ng-init="checkRunning(tourn)" ng-click="filterTournamentMatches(tourn._id)">
 								<td>
 									<a href="">{{tourn.name}}</a>
 								</td>
@@ -104,12 +104,16 @@
 						
 						<table class="table table-condensed" style="margin-bottom:5px" 
 							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']"
-							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'"
-							>
+							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'">
 
 							<tr>
 								<td width="10%" rowspan="2" style="text-align:center;vertical-align:middle">
 									{{match.round}}
+									<br>
+									<a ng-show="(session.data && match.score.set_p1==0 && match.score.set_p2==0)" ng-click="setSelectedMatch(match)" ng-href="/#/matches/{{selectedTournament._id}}/{{match._id}}" 
+									class="btn btn-primary btn-xs">
+										Placar
+									</a>
 								</td>
 								<td width="70%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
 									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">

@@ -3,7 +3,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Adicionar Partida</h4>
+        <h4 class="modal-title" ng-hide="(matchId)">Adicionar Partida</h4>
+        <h4 class="modal-title" ng-show="(matchId)">Editar Partida</h4>
       </div>
       <div class="modal-body">
         
@@ -15,10 +16,12 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                  <label>Jogador 1:</label>
-                  <select class="form-control" ng-model="match.p1_id" name="p1_id">
+                  <label>Jogador 1:</label><br />
+                  <select ng-hide="(matchId)" class="form-control" ng-model="match.p1_id" name="p1_id">
                     <option ng-repeat="player in playerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
                   </select>
+                  {{getPlayerName(match.p1_id)}}
+                  <input ng-show="(matchId)" type="text" ng-model="match.p1_id" style="display:none">
               </div>
             </div>
             <div class="col-md-2">
@@ -52,10 +55,12 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                  <label>Jogador 2:</label>
-                  <select class="form-control" ng-model="match.p2_id" name="p2_id">
+                  <label>Jogador 2:</label><br />
+                  <select ng-hide="(matchId)" class="form-control" ng-model="match.p2_id" name="p2_id">
                     <option ng-repeat="player in playerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
                   </select>
+                  {{getPlayerName(match.p2_id)}}
+                  <input ng-show="(matchId)" type="text" ng-model="match.p2_id" style="display:none">
               </div>
             </div>
             <div class="col-md-2">
@@ -87,8 +92,8 @@
           </div>
 
           <div class="form-group">
-            <label>Round:</label>
-            <select class="form-control" ng-model="match.round" name="p2_id">
+            <label>Round:</label><br />
+            <select ng-hide="(matchId)" class="form-control" ng-model="match.round" name="p2_id">
               <option value="RR">RR</option>
               <option value="R32">R32</option>
               <option value="R16">R16</option>
@@ -97,6 +102,8 @@
               <option value="S">S</option>
               <option value="F">F</option>
             </select>
+            {{match.round}}
+            <input ng-show="(matchId)" type="text" ng-model="match.round" style="display:none">
           </div>
 
   		</form>

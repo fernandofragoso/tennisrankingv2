@@ -4,8 +4,8 @@ var rankingApp = angular
 		$routeProvider.
 			when("/login",{templateUrl:'partials/login.html',controller:'LoginController'}).
 			when("/players",{templateUrl:'partials/players.html',controller:'PlayerController'}).
-			when("/matches",{templateUrl:'partials/matches.html',controller:'MatchController'}).
 			when("/matches/:tournId",{templateUrl:'partials/matches.html',controller:'MatchController'}).
+			when("/matches/:tournId/:matchId",{templateUrl:'partials/matches.html',controller:'MatchController'}).
 			otherwise({redirectTo:'/'});
 	}]);
 
@@ -79,21 +79,30 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 
 	$scope.setsp1 = [];
 	$scope.setsp2 = [];
-	$scope.tournid_test = "TESTE";
+	$scope.match = null;
 
 	//SHOW MODAL
 	$('#matchmodal').modal('show');
 
 	$('#matchmodal').on('hidden.bs.modal', function () {
 	    $scope.changeRoute('/#/');
-	})
+	});
 
 	$scope.tournId = $routeParams.tournId;
+	$scope.matchId = $routeParams.matchId;
+
+	if ($scope.matchId) {
+	  	$scope.match = $scope.selectedMatch;
+	}
 
 	$scope.submit = function(){
 
-		$scope.p1_id = this.match.p1_id;
-		$scope.p2_id = this.match.p2_id;
+		console.log("match controller: " + JSON.stringify(this.match));
+
+		//if (this.match.p1_id) {
+			$scope.p1_id = this.match.p1_id;
+			$scope.p2_id = this.match.p2_id;
+		//}
 
 		//INITIALIZE SCORES
 		this.match.score = {};
@@ -224,9 +233,16 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 
 		}
 		
-		$scope.Match.save(this.match, function(data){
-			//$scope.changeRoute('/#/');
-		});
+		if ($scope.matchId) {
+			console.log("UPDATE");
+			$scope.Match.update({ _id:$scope.matchId },this.match);
+
+		} else {
+			console.log("SAVE");
+			$scope.Match.save(this.match, function(data){
+				//$scope.changeRoute('/#/');
+			});
+		}
 	}
 
 }]);

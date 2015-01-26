@@ -1,8 +1,16 @@
-rankingApp.controller("TournamentController",['$scope','$resource', function($scope, $resource){
+rankingApp.controller("TournamentController",['$scope','$timeout','$resource', function($scope, $timeout, $resource){
 
 	$scope.tournamentPlayerList = [];
 	$scope.tournamentMatchList = [];
 	$scope.selectedTournament = {_id:0,name:"Selecione um torneio"};
+
+	//OPEN TOURNAMENT IF RUNNING
+	$scope.checkRunning = function(tournament){
+		if(tournament.running){
+			console.log(tournament.name + " IS RUNNING");
+			$scope.filterTournamentMatches(tournament._id);
+		}
+	}
 
 	//FILTER MATCHES PER TOURNAMENT
 	$scope.filterTournamentMatches = function(tournamentId){
@@ -40,10 +48,8 @@ rankingApp.controller("TournamentController",['$scope','$resource', function($sc
 					
 					//FIND PLAYER GROUP
 					for(var j = 0;j<$scope.selectedTournament.groups.length;j++){
-						console.log("name: " + $scope.selectedTournament.groups[j].groupname);
 						if($scope.selectedTournament.groups[j].players.indexOf($scope.playerList[i]._id)!=-1){
 							$scope.playerList[i].group = $scope.selectedTournament.groups[j].groupname;
-							console.log($scope.playerList[i].name + " - GROUP " + $scope.selectedTournament.groups[j].groupname);
 						}
 					}
 

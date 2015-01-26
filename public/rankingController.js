@@ -1,4 +1,4 @@
-rankingApp.controller("RankingController",['$scope','$resource', '$location', 'Session', function($scope, $resource, $location, Session){
+rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$location', 'Session', function($scope, $timeout, $resource, $location, Session){
 	
 	//$RESOURCE CONFIGURATION
 	$scope.Player = $resource('/api/players/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
@@ -26,6 +26,8 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', 'S
 	$scope.playerLoaded = false;
 	$scope.tournamentLoaded = false;
 	$scope.selectedPlayer = {_id:0,name:"Selecione um jogador"};
+
+	$scope.selectedMatch = null;
 	
 	$scope.playerMatchList = [];
 	$scope.tournamentMatchList = [];
@@ -41,8 +43,8 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', 'S
 
 			for (var i = 0;i<$scope.tournList.length;i++){
 				if ($scope.tournList[i].running) {
+					var id = $scope.tournList[i]._id;
 					console.log("running: " + $scope.tournList[i]._id);
-					// $scope.filterTournamentMatches($scope.tournList[i]._id);
 				}
 			}
 		});
@@ -86,6 +88,12 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', 'S
 		// 	var player = data;
 		// 	return 1;
 		// });
+    };
+
+    $scope.setSelectedMatch = function(match){
+    	
+    	$scope.selectedMatch = match;
+
     };
 
 	//FILTER MATCHES PER PLAYER
@@ -138,12 +146,14 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', 'S
 	$scope.getFullMatch = function(matchId) {
 		
 		var match = $scope.findMatchById(matchId);
+
+		console.log(JSON.stringify(match));
 		
-		var player1 = $scope.findPlayerById(match.player1);
-		match.player1 = player1.name;	
+		// var player1 = $scope.findPlayerById(match.p1_id);
+		// match.player1 = player1.name;	
 		
-		var player2 = $scope.findPlayerById(match.player2);
-		match.player2 = player2.name;
+		// var player2 = $scope.findPlayerById(match.p2_id);
+		// match.player2 = player2.name;
 		
 		return match;
 		
@@ -172,11 +182,14 @@ rankingApp.controller("RankingController",['$scope','$resource', '$location', 'S
 	$scope.findMatchById = function(matchId) {
 		
 		var match;
-		
+		console.log("TAMANHO: " + $scope.matchList.length);
 		for (var i=0; i<$scope.matchList.length; i++) {
-			if ($scope.matchList[i].id === matchId) {
+			if ($scope.matchList[i]._id === matchId) {
+				console.log("SIM");
 				match = $scope.matchList[i];
 				return angular.copy(match);
+			} else {
+				console.log("NAO");
 			}
 		}
 		
