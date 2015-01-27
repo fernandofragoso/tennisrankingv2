@@ -20,7 +20,7 @@
                   <select ng-hide="(matchId)" class="form-control" ng-model="match.p1_id" name="p1_id">
                     <option ng-repeat="player in playerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
                   </select>
-                  {{getPlayerName(match.p1_id)}}
+                  <span ng-show="(matchId)">{{getPlayerName(match.p1_id)}}</span>
                   <input ng-show="(matchId)" type="text" ng-model="match.p1_id" style="display:none">
               </div>
             </div>
@@ -59,7 +59,7 @@
                   <select ng-hide="(matchId)" class="form-control" ng-model="match.p2_id" name="p2_id">
                     <option ng-repeat="player in playerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
                   </select>
-                  {{getPlayerName(match.p2_id)}}
+                  <span ng-show="(matchId)">{{getPlayerName(match.p2_id)}}</span>
                   <input ng-show="(matchId)" type="text" ng-model="match.p2_id" style="display:none">
               </div>
             </div>
@@ -102,7 +102,7 @@
               <option value="S">S</option>
               <option value="F">F</option>
             </select>
-            {{match.round}}
+            <span ng-show="(matchId)">{{match.round}}</span>
             <input ng-show="(matchId)" type="text" ng-model="match.round" style="display:none">
           </div>
 

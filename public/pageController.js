@@ -12,12 +12,29 @@ var rankingApp = angular
 rankingApp.factory('Session', function(){
 	var Session = {
 		data: {},
-		saveSession: function(){},
-		updateSession: function(user){
+		saveSession: function(user){
+			sessionStorage.login = JSON.stringify(user);
 			Session.data = user;
+			console.log("saveSession: " + sessionStorage.login);
+			console.log("Session.data.login: " + Session.data.login);
+		},
+		updateSession: function(){
+			console.log("updateSession: " + sessionStorage.login);
+			if (sessionStorage.login) {
+				Session.data = JSON.parse(sessionStorage.login);
+				console.log("Session.data: " + Session.data);
+			} else {
+				Session.data = null;
+				console.log("Session.data.login: " + Session.data);
+			}
+		},
+		clearSession: function(){
+			console.log("clearSession: " + sessionStorage.login);
+			sessionStorage.removeItem("login");
+			Session.data = null;
 		}
 	};
-	Session.updateSession(null);
+	Session.updateSession();
 	return Session;
 });
 
@@ -31,7 +48,7 @@ rankingApp.controller("LoginController",['$scope','$window','$routeParams','Sess
 
 	$scope.login = function(user){
 		console.log("login");
-		$scope.session.updateSession(user);
+		$scope.session.saveSession(user);
 	}
 
 	$scope.submit = function(){
@@ -270,9 +287,9 @@ rankingApp.controller("PageController",['$scope', function($scope){
 
 	}
 
-	$scope.logout = function(){
+	$scope.logout = function(user){
 		console.log("logout");
-		$scope.session.updateSession(null);
+		$scope.session.clearSession();
 	}
 
 }]);
