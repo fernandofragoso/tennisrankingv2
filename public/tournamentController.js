@@ -4,6 +4,11 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 	$scope.tournamentMatchList = [];
 	$scope.selectedTournament = {_id:0,name:"Selecione um torneio"};
 
+	//UPDATE TOURNAMENT
+	$scope.updateTournament = function(){
+		$scope.filterTournamentMatches($scope.selectedTournament._id);
+	}
+
 	//OPEN TOURNAMENT IF RUNNING
 	$scope.checkRunning = function(tournament){
 		if(tournament.running){

@@ -23,6 +23,7 @@ router.route('/login')
 				res.json({error: 'FAILED LOGIN: ' + JSON.stringify(req.body.login)});
 			} else {
 				// res.json({message: 'LOGIN: ' + JSON.stringify(req.body.login)});
+				user.password = "";
 				res.json(user);
 			}
 		});
