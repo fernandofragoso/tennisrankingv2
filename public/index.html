@@ -98,8 +98,6 @@
 								<td width="10%" align="center">{{player.tournamentpoints}}</td>
 							</tr>
 
-							
-
 						</table>
 						
 						<table class="table table-condensed" style="margin-bottom:5px" 
@@ -107,20 +105,16 @@
 							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'">
 
 							<tr>
-								<td width="10%" rowspan="2" style="text-align:center;vertical-align:middle">
+								<td width="5%" rowspan="2" style="text-align:center;vertical-align:middle">
 									{{match.round}}
-									<br>
-									<a ng-show="(session.data && match.score.set_p1==0 && match.score.set_p2==0)" ng-click="setSelectedMatch(match)" ng-href="/#/matches/{{selectedTournament._id}}/{{match._id}}" 
-									class="btn btn-primary btn-xs">
-										Placar
-									</a>
 								</td>
-								<td width="70%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
+								<td width="50%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
 									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
 										{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
 									{{getPlayerName(match.p1_id)}}
 								</td>
-								<td width="20%" align="right" style="vertical-align:middle">
+								
+								<td width="25%" align="right" style="vertical-align:middle">
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p1}}</span>
 								</td>
 							</tr>
@@ -132,6 +126,20 @@
 								</td>
 								<td align="right" style="vertical-align:middle">
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p2}}</span>
+								</td>
+							</tr>
+							<tr ng-show="(session.data)">
+								<td colspan="3" style="text-align:right;vertical-align:middle;padding:0px;margin:0px;">
+
+									<a ng-show="(session.data && match.score.set_p1==0 && match.score.set_p2==0)" ng-click="setSelectedMatch(match)" ng-href="/#/matches/{{selectedTournament._id}}/{{match._id}}" 
+									class="btn btn-primary btn-xs">
+										Inserir Placar
+									</a>
+									<a ng-show="(session.data)" ng-click="removeMatch(match)"
+									class="btn btn-danger btn-xs">
+										Remover Partida
+									</a>
+
 								</td>
 							</tr>
 							
