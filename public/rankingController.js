@@ -113,9 +113,56 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
     };
 
     $scope.removeMatch = function(match){
+    	console.log("Remove Match");
     	
-    	$scope.Match.remove({id:match._id});
-    	$scope.updateTournament();
+    	var points_p1 = 0;
+    	var points_p2 = 0;
+
+    	//IF THE MATCH IS ALREADY FINISHED, REMOVE POINTS
+    	if(match.score.set_p1==0 && match.score.set_p2==0){
+    		$scope.Match.remove({id:match._id});
+    		$scope.updatePlayerList(function(){});
+    	} else {
+	    	console.log("REMOVING POINTS...");
+	    	if(match.score.set_p1 > match.score.set_p2) {
+	    		//P1 WINNER
+	    		//REMOVE 10 POINTS
+	    		console.log("REMOVE 10 POINTS FROM " + $scope.getPlayerName(match.p1_id));
+	    		points_p1 = -10;
+	    		if(!match.score.wo){
+	    			//P2 LOSER
+	    			//IF NOT WO REMOVE 5 POINTS
+	    			console.log("REMOVE 5 POINTS FROM " + $scope.getPlayerName(match.p2_id));
+	    			points_p2 = -5;
+	    		}	
+	    	} else {
+	    		//P2 WINNER
+	    		//REMOVE 10 POINTS
+	    		console.log("REMOVE 10 POINTS FROM " + $scope.getPlayerName(match.p2_id));
+	    		points_p2 = -10;
+	    		if(!match.score.wo){
+	    			//P2 LOSER
+	    			//IF NOT WO REMOVE 5 POINTS
+	    			console.log("REMOVE 5 POINTS FROM " + $scope.getPlayerName(match.p1_id));
+	    			points_p1 = -5;
+	    		}
+	    	}
+
+	    	$scope.updatePlayerList(function(){
+
+				var player1 = $scope.findPlayerById(match.p1_id);
+				var player2 = $scope.findPlayerById(match.p2_id);
+
+				player1.points += points_p1;
+				$scope.Player.update({ id:player1._id }, player1);
+
+				player2.points += points_p2;
+				$scope.Player.update({ id:player2._id }, player2);
+			
+			});
+	    	
+	    	$scope.Match.remove({id:match._id});
+	    }
 
     };
 

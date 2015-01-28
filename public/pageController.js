@@ -248,6 +248,8 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 				$scope.Player.update({ id:player2._id }, player2);
 			});
 
+		} else {
+			$scope.updatePlayerList(function(){});
 		}
 		
 		if ($scope.matchId) {
@@ -267,6 +269,8 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 rankingApp.controller("PageController",['$scope', function($scope){
 
 	$scope.showTab = function(num) {
+
+		$scope.updatePlayerList(function(){});
 	    
 		switch(num){
 			case 1:

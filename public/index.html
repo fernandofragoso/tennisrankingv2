@@ -135,7 +135,9 @@
 										<a ng-click="setSelectedMatch(match)" ng-href="/#/matches/{{selectedTournament._id}}/{{match._id}}" class="btn btn-primary btn-xs">
 											Inserir Placar
 										</a>
-										<a ng-click="removeMatch(match)" href="#" confirmation-needed="Deseja realmente excluir?" class="btn btn-danger btn-xs">
+									</span>
+									<span ng-show="(session.data)">
+										<a ng-click="removeMatch(match)" confirmation-needed="Deseja realmente excluir?" class="btn btn-danger btn-xs">
 											Remover Partida
 										</a>
 									</span>
