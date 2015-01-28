@@ -270,7 +270,7 @@ rankingApp.controller("PageController",['$scope', function($scope){
 
 	$scope.showTab = function(num) {
 
-		$scope.updatePlayerList(function(){});
+		// $scope.updatePlayerList(function(){});
 	    
 		switch(num){
 			case 1:
