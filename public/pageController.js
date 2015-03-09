@@ -130,6 +130,14 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 		//SET TOURN ID
 		this.match.tourn_id = $scope.tournId;
 
+		//CHECKING BYE
+		if ($scope.p2_id==0){
+			$scope.bye = true;
+			$scope.p2_id = null;
+			this.match.p2_id = null;
+			console.log("CHECKING BYE - $scope.bye = true;");
+		}
+
 		//CHECKING WO
 		if ($scope.setsp1[0] == "W") {
 			this.match.score.wo = true;
@@ -165,6 +173,12 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 				} else {
 					this.match.score.set_p2++;
 				}
+			}
+
+			if ($scope.bye) {
+				this.match.score.set_p1 = 2;
+				this.match.score.set_p2 = 0;
+				console.log("COUNT SCORES - $scope.bye = true;");
 			}
 
 			//SET GAMES
@@ -239,13 +253,17 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 			$scope.updatePlayerList(function(){
 
 				var player1 = $scope.findPlayerById($scope.p1_id);
-				var player2 = $scope.findPlayerById($scope.p2_id);
 
 				player1.points += points_p1;
 				$scope.Player.update({ id:player1._id }, player1);
 
-				player2.points += points_p2;
-				$scope.Player.update({ id:player2._id }, player2);
+				if (!$scope.bye) {
+					console.log("updatePlayerList - $scope.bye = false;")
+					var player2 = $scope.findPlayerById($scope.p2_id);
+
+					player2.points += points_p2;
+					$scope.Player.update({ id:player2._id }, player2);
+				}
 			});
 
 		} else {
@@ -259,7 +277,7 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 		} else {
 			console.log("SAVE");
 			$scope.Match.save(this.match, function(data){
-				//$scope.changeRoute('/#/');
+				console.log("Saved");
 			});
 		}
 	}

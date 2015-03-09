@@ -285,6 +285,9 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 	$scope.getPlayerName = function(playerId) {
 		var playerName = "";
 		
+		if (playerId == "" || playerId == null)
+			return "BYE"
+
 		for (var i=0; i<$scope.playerList.length; i++) {
 			if ($scope.playerList[i]._id == playerId) {
 				

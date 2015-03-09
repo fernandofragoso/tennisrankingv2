@@ -58,6 +58,7 @@
                   <label>Jogador 2:</label><br />
                   <select ng-hide="(matchId)" class="form-control" ng-model="match.p2_id" name="p2_id">
                     <option ng-repeat="player in playerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
+                    <option value="0">BYE</option>
                   </select>
                   <span ng-show="(matchId)">{{getPlayerName(match.p2_id)}}</span>
                   <input ng-show="(matchId)" type="text" ng-model="match.p2_id" style="display:none">
