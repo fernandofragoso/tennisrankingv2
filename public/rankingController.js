@@ -125,27 +125,67 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
     	} else {
 	    	console.log("REMOVING POINTS...");
 	    	if(match.score.set_p1 > match.score.set_p2) {
-	    		//P1 WINNER
-	    		//REMOVE 10 POINTS
-	    		console.log("REMOVE 10 POINTS FROM " + $scope.getPlayerName(match.p1_id));
-	    		points_p1 = -10;
-	    		if(!match.score.wo){
-	    			//P2 LOSER
-	    			//IF NOT WO REMOVE 5 POINTS
-	    			console.log("REMOVE 5 POINTS FROM " + $scope.getPlayerName(match.p2_id));
-	    			points_p2 = -5;
-	    		}	
-	    	} else {
-	    		//P2 WINNER
-	    		//REMOVE 10 POINTS
-	    		console.log("REMOVE 10 POINTS FROM " + $scope.getPlayerName(match.p2_id));
-	    		points_p2 = -10;
-	    		if(!match.score.wo){
-	    			//P2 LOSER
-	    			//IF NOT WO REMOVE 5 POINTS
-	    			console.log("REMOVE 5 POINTS FROM " + $scope.getPlayerName(match.p1_id));
-	    			points_p1 = -5;
+	    		
+	    		switch(match.round){
+	    			case "RR":
+	    				//P1 WINNER
+	    				//REMOVE 10 POINTS
+	    				console.log("REMOVE 10 POINTS FROM " + $scope.getPlayerName(match.p1_id));
+			    		points_p1 = -10;
+			    		if(!match.score.wo){
+			    			//P2 LOSER
+			    			//IF NOT WO REMOVE 5 POINTS
+			    			console.log("REMOVE 5 POINTS FROM " + $scope.getPlayerName(match.p2_id));
+			    			points_p2 = -5;
+			    		}
+	    				break;
+	    			case "R32":
+					case "R16":
+					case "R8":
+						points_p1 = -10;
+						points_p2 = -10;
+						break;
+					case "S":
+						points_p1 = -20;
+						points_p2 = -20;
+						break;
+					case "F":
+						points_p1 = -50;
+						points_p2 = -20;
+						break;
 	    		}
+	    			
+	    	} else {
+	    		
+	    		switch(match.round){
+	    			case "RR":
+	    				//P2 WINNER
+	    				//REMOVE 10 POINTS
+	    				console.log("REMOVE 10 POINTS FROM " + $scope.getPlayerName(match.p2_id));
+			    		points_p2 = -10;
+			    		if(!match.score.wo){
+			    			//P1 LOSER
+			    			//IF NOT WO REMOVE 5 POINTS
+			    			console.log("REMOVE 5 POINTS FROM " + $scope.getPlayerName(match.p1_id));
+			    			points_p1 = -5;
+			    		}
+	    				break;
+	    			case "R32":
+					case "R16":
+					case "R8":
+						points_p1 = -10;
+						points_p2 = -10;
+						break;
+					case "S":
+						points_p1 = -20;
+						points_p2 = -20;
+						break;
+					case "F":
+						points_p1 = -20;
+						points_p2 = -50;
+						break;
+	    		}
+
 	    	}
 
 	    	$scope.updatePlayerList(function(){
