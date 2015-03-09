@@ -100,6 +100,79 @@
 
 						</table>
 						
+						<table class="table table-condensed" ng-show="(selectedTournament.brackets.type == 'Q')">
+
+							<tr bgcolor="#EEE">
+								<th>Quartas</th>
+								<th>Semis</th>
+								<th>Final</th>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="q1" value="{{selectedTournament.brackets.q1}}" style="width:80px" disabled><br>
+									<input type="text" id="q2" value="{{selectedTournament.brackets.q2}}" style="width:80px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="2">
+									<input type="text" id="s1" value="{{selectedTournament.brackets.s1}}" style="width:80px" disabled><br>
+									<input type="text" id="s2" value="{{selectedTournament.brackets.s2}}" style="width:80px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="4">
+									<input type="text" id="f1" value="{{selectedTournament.brackets.f1}}" style="width:80px" disabled><br>
+									<input type="text" id="f2" value="{{selectedTournament.brackets.f2}}" style="width:80px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="q3" value="{{selectedTournament.brackets.q3}}" style="width:80px" disabled><br>
+									<input type="text" id="q4" value="{{selectedTournament.brackets.q4}}" style="width:80px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="q5" value="{{selectedTournament.brackets.q5}}" style="width:80px" disabled><br>
+									<input type="text" id="q6" value="{{selectedTournament.brackets.q6}}" style="width:80px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="2">
+									<input type="text" id="s3" value="{{selectedTournament.brackets.s3}}" style="width:80px" disabled><br>
+									<input type="text" id="s4" value="{{selectedTournament.brackets.s4}}" style="width:80px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="q7" value="{{selectedTournament.brackets.q7}}" style="width:80px" disabled><br>
+									<input type="text" id="q8" value="{{selectedTournament.brackets.q8}}" style="width:80px" disabled>
+								</td>
+							</tr>
+
+
+						</table>
+
+						<table class="table table-condensed" ng-show="(selectedTournament.brackets.type == 'S')">
+
+							<tr bgcolor="#EEE">
+								<th>Semis</th>
+								<th>Final</th>
+							</tr>
+							<tr>
+								<td style="vertical-align:middle">
+									<input type="text" id="s1" value="{{selectedTournament.brackets.s1}}" style="width:80px" disabled><br>
+									<input type="text" id="s2" value="{{selectedTournament.brackets.s2}}" style="width:80px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="2">
+									<input type="text" id="f1" value="{{selectedTournament.brackets.f1}}" style="width:80px" disabled><br>
+									<input type="text" id="f2" value="{{selectedTournament.brackets.f2}}" style="width:80px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align:middle">
+									<input type="text" id="s3" value="{{selectedTournament.brackets.s3}}" style="width:80px" disabled><br>
+									<input type="text" id="s4" value="{{selectedTournament.brackets.s4}}" style="width:80px" disabled>
+								</td>
+							</tr>
+
+
+						</table>
+
 						<table class="table table-condensed" style="margin-bottom:5px" 
 							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']"
 							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'">

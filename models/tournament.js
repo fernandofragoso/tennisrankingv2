@@ -8,6 +8,10 @@ var schema = new Schema({
 	running: Boolean,
 	players: [ { type: Schema.ObjectId } ],
 	groups: [ { groupname: String, players: [{type: Schema.ObjectId}] } ],
+	brackets: { type: { type: String, enum: ["Q", "S", "F"] }, 
+		q1: String, q2: String, q3: String, q4: String, q5: String, q6: String, q7: String, q8: String,
+		s1: String, s2: String, s3: String, s4: String,
+		f1: String, f2: String },
 	matches: []
 });
 
