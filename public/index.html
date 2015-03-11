@@ -100,7 +100,97 @@
 
 						</table>
 						
-						<table class="table table-condensed" ng-show="(selectedTournament.brackets.type == 'Q')">
+
+						<table align="center" style="text-align:center;width:350px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type == '8')">
+
+							<tr bgcolor="#EEE">
+								<th>R8</th>
+								<th>QF</th>
+								<th>SF</th>
+								<th>Final</th>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="81" value="{{selectedTournament.brackets.81}}" style="width:65px" disabled><br>
+									<input type="text" id="82" value="{{selectedTournament.brackets.82}}" style="width:65px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="2">
+									<input type="text" id="q1" value="{{selectedTournament.brackets.q1}}" style="width:65px" disabled><br>
+									<input type="text" id="q2" value="{{selectedTournament.brackets.q2}}" style="width:65px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="4">
+									<input type="text" id="s1" value="{{selectedTournament.brackets.s1}}" style="width:65px" disabled><br>
+									<input type="text" id="s2" value="{{selectedTournament.brackets.s2}}" style="width:65px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="8">
+									<input type="text" id="f1" value="{{selectedTournament.brackets.f1}}" style="width:65px" disabled><br>
+									<input type="text" id="f2" value="{{selectedTournament.brackets.f2}}" style="width:65px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="83" value="{{selectedTournament.brackets.83}}" style="width:65px" disabled><br>
+									<input type="text" id="84" value="{{selectedTournament.brackets.84}}" style="width:65px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="85" value="{{selectedTournament.brackets.85}}" style="width:65px" disabled><br>
+									<input type="text" id="86" value="{{selectedTournament.brackets.86}}" style="width:65px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="2">
+									<input type="text" id="q3" value="{{selectedTournament.brackets.q3}}" style="width:65px" disabled><br>
+									<input type="text" id="q4" value="{{selectedTournament.brackets.q4}}" style="width:65px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="87" value="{{selectedTournament.brackets.87}}" style="width:65px" disabled><br>
+									<input type="text" id="88" value="{{selectedTournament.brackets.88}}" style="width:65px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="89" value="{{selectedTournament.brackets.89}}" style="width:65px" disabled><br>
+									<input type="text" id="810" value="{{selectedTournament.brackets.810}}" style="width:65px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="2">
+									<input type="text" id="q5" value="{{selectedTournament.brackets.q5}}" style="width:65px" disabled><br>
+									<input type="text" id="q6" value="{{selectedTournament.brackets.q6}}" style="width:65px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="4">
+									<input type="text" id="s3" value="{{selectedTournament.brackets.s3}}" style="width:65px" disabled><br>
+									<input type="text" id="s4" value="{{selectedTournament.brackets.s4}}" style="width:65px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="811" value="{{selectedTournament.brackets.811}}" style="width:65px" disabled><br>
+									<input type="text" id="812" value="{{selectedTournament.brackets.812}}" style="width:65px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="813" value="{{selectedTournament.brackets.813}}" style="width:65px" disabled><br>
+									<input type="text" id="814" value="{{selectedTournament.brackets.814}}" style="width:65px" disabled>
+								</td>
+								<td style="vertical-align:middle" rowspan="2">
+									<input type="text" id="q7" value="{{selectedTournament.brackets.q7}}" style="width:65px" disabled><br>
+									<input type="text" id="q8" value="{{selectedTournament.brackets.q8}}" style="width:65px" disabled>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" id="815" value="{{selectedTournament.brackets.815}}" style="width:65px" disabled><br>
+									<input type="text" id="816" value="{{selectedTournament.brackets.816}}" style="width:65px" disabled>
+								</td>
+							</tr>
+
+
+						</table>
+
+
+						<table align="center" style="text-align:center;width:350px;border:1px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type == 'Q')">
 
 							<tr bgcolor="#EEE">
 								<th>QF</th>
@@ -147,7 +237,7 @@
 
 						</table>
 
-						<table class="table table-condensed" ng-show="(selectedTournament.brackets.type == 'S')">
+						<table align="center" style="text-align:center;width:350px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type == 'S')">
 
 							<tr bgcolor="#EEE">
 								<th>SF</th>
@@ -155,18 +245,18 @@
 							</tr>
 							<tr>
 								<td style="vertical-align:middle">
-									<input type="text" id="s1" value="{{selectedTournament.brackets.s1}}" style="width:80px" disabled><br>
-									<input type="text" id="s2" value="{{selectedTournament.brackets.s2}}" style="width:80px" disabled>
+									<input type="text" id="s1" value="{{selectedTournament.brackets.s1}}" style="width:100px" disabled><br>
+									<input type="text" id="s2" value="{{selectedTournament.brackets.s2}}" style="width:100px" disabled>
 								</td>
 								<td style="vertical-align:middle" rowspan="2">
-									<input type="text" id="f1" value="{{selectedTournament.brackets.f1}}" style="width:80px" disabled><br>
-									<input type="text" id="f2" value="{{selectedTournament.brackets.f2}}" style="width:80px" disabled>
+									<input type="text" id="f1" value="{{selectedTournament.brackets.f1}}" style="width:100px" disabled><br>
+									<input type="text" id="f2" value="{{selectedTournament.brackets.f2}}" style="width:100px" disabled>
 								</td>
 							</tr>
 							<tr>
 								<td style="vertical-align:middle">
-									<input type="text" id="s3" value="{{selectedTournament.brackets.s3}}" style="width:80px" disabled><br>
-									<input type="text" id="s4" value="{{selectedTournament.brackets.s4}}" style="width:80px" disabled>
+									<input type="text" id="s3" value="{{selectedTournament.brackets.s3}}" style="width:100px" disabled><br>
+									<input type="text" id="s4" value="{{selectedTournament.brackets.s4}}" style="width:100px" disabled>
 								</td>
 							</tr>
 
