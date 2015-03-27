@@ -162,6 +162,10 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 		return points;
 	};
 	
+	$scope.saveTournament = function(tournament){
+		$scope.Tournament.update({ _id:tournament._id },tournament);
+		alert("Chaves atualizadas");
+	};
 	
 
 }]);
