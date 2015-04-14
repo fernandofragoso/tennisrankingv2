@@ -100,7 +100,7 @@
 							ng-init="($index+1 > selectedTournament.groups[0].players.lenght) ?
 							 					($index+1 % selectedTournament.groups[0].players.lenght == 0) ?
 													groupPos = ($index+1/selectedTournament.groups[0].players.lenght)+1 :
-													groupPos = $index+1 - (Math.floor($index+1/selectedTournament.groups[0].players.lenght) * $index+1) : 
+													groupPos = $index+1 - (Math.floor($index+1/selectedTournament.groups[0].players.lenght) * $index+1) :
 											groupPos = $index+1"
 							ng-class="{'info' : (player.group == selectedTournament.groups[0].groupname),
 												'success' : (player.group == selectedTournament.groups[1].groupname),
@@ -109,9 +109,7 @@
 							>
 								<td align="center" width="5%">
 									<strong>
-										{{ ((selectedTournament.groups.lenght > 0) && ($index+1 > selectedTournament.groups[0].players.lenght )) ?
-											($index+1 = ) :
-											$index+1 }}
+										{{ groupPos }}
 									</strong>
 								</td>
 								<td>
