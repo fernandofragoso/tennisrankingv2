@@ -47,7 +47,7 @@
 								<th>Torneio</th>
 								<th align="center" width="10%"></th>
 							</tr>
-							
+
 							<tr id="loadingtournaments" ng-hide="listLoaded">
 								<td colspan="4" align="center">
 									<img src="img/ajax-loader.gif">
@@ -68,11 +68,11 @@
 						</table>
 
 					</div>
-					
+
 				</div>
 
 				<div class="panel panel-default">
-					
+
 					<div id="tournmatches" class="panel-heading">
 						<img src="img/picture.jpg" style="width: 55px;height:55px;float:left;margin-right:10px">
 						<h3>{{selectedTournament.name}}</h3>
@@ -83,13 +83,22 @@
 
 							<tr ng-show="(selectedTournament.groups.length > 0)">
 								<td colspan="3" align="center">
-									<span class="label label-info">{{selectedTournament.groups[0].groupname}}</span>
-									<span class="label label-success">{{selectedTournament.groups[1].groupname}}</span>
+									<!-- <span class="label label-info">{{selectedTournament.groups[0].groupname}}</span>
+									<span class="label label-success">{{selectedTournament.groups[1].groupname}}</span> -->
+
+									<span ng-repeat="group in selectedTournament.groups"
+												ng-class="'label-info' : (group.groupname == selectedTournament.groups[0].groupname),
+																	'label-success' : (group.groupname == selectedTournament.groups[1].groupname),
+																	'label-warning' : (group.groupname == selectedTournament.groups[2].groupname),
+																	'label-danger' : (group.groupname == selectedTournament.groups[3].groupname)"
+											  class="label">{{group.groupname}}</span>
+
 								</td>
 							</tr>
 
 							<tr ng-repeat="player in tournamentPlayerList | orderBy:['group','-tournamentpoints','name']"
-							ng-class="(selectedTournament.groups.length > 0) ? ((player.group == selectedTournament.groups[0].groupname) ? 'info' : 'success' ): ''">
+							ng-class="(selectedTournament.groups.length > 0) ? ((player.group == selectedTournament.groups[0].groupname) ? 'info' : 'success' ): ''"
+							ng-class="{}[player.group]">
 								<td align="center" width="5%"><strong>{{($index+1>5 && selectedTournament.groups.length > 0) ? $index+1-5 : $index+1}}</strong></td>
 								<td>
 									{{player.name}}
@@ -99,7 +108,7 @@
 							</tr>
 
 						</table>
-						
+
 
 						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type)">
 
@@ -196,82 +205,8 @@
 
 						</table>
 
-						<!--
-						<table align="center" style="text-align:center;width:300px;border:1px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type == 'Q')">
 
-							<tr bgcolor="#EEE">
-								<th>QF</th>
-								<th>SF</th>
-								<th>Final</th>
-							</tr>
-							<tr>
-								<td>
-									<input type="text" id="q1" value="{{selectedTournament.brackets.q1}}" style="width:80px" disabled><br>
-									<input type="text" id="q2" value="{{selectedTournament.brackets.q2}}" style="width:80px" disabled>
-								</td>
-								<td style="vertical-align:middle" rowspan="2">
-									<input type="text" id="s1" value="{{selectedTournament.brackets.s1}}" style="width:80px" disabled><br>
-									<input type="text" id="s2" value="{{selectedTournament.brackets.s2}}" style="width:80px" disabled>
-								</td>
-								<td style="vertical-align:middle" rowspan="4">
-									<input type="text" id="f1" value="{{selectedTournament.brackets.f1}}" style="width:80px" disabled><br>
-									<input type="text" id="f2" value="{{selectedTournament.brackets.f2}}" style="width:80px" disabled>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="text" id="q3" value="{{selectedTournament.brackets.q3}}" style="width:80px" disabled><br>
-									<input type="text" id="q4" value="{{selectedTournament.brackets.q4}}" style="width:80px" disabled>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="text" id="q5" value="{{selectedTournament.brackets.q5}}" style="width:80px" disabled><br>
-									<input type="text" id="q6" value="{{selectedTournament.brackets.q6}}" style="width:80px" disabled>
-								</td>
-								<td style="vertical-align:middle" rowspan="2">
-									<input type="text" id="s3" value="{{selectedTournament.brackets.s3}}" style="width:80px" disabled><br>
-									<input type="text" id="s4" value="{{selectedTournament.brackets.s4}}" style="width:80px" disabled>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="text" id="q7" value="{{selectedTournament.brackets.q7}}" style="width:80px" disabled><br>
-									<input type="text" id="q8" value="{{selectedTournament.brackets.q8}}" style="width:80px" disabled>
-								</td>
-							</tr>
-
-
-						</table>
-
-						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type == 'S')">
-
-							<tr bgcolor="#EEE">
-								<th>SF</th>
-								<th>Final</th>
-							</tr>
-							<tr>
-								<td style="vertical-align:middle">
-									<input type="text" id="s1" value="{{selectedTournament.brackets.s1}}" style="width:100px" disabled><br>
-									<input type="text" id="s2" value="{{selectedTournament.brackets.s2}}" style="width:100px" disabled>
-								</td>
-								<td style="vertical-align:middle" rowspan="2">
-									<input type="text" id="f1" value="{{selectedTournament.brackets.f1}}" style="width:100px" disabled><br>
-									<input type="text" id="f2" value="{{selectedTournament.brackets.f2}}" style="width:100px" disabled>
-								</td>
-							</tr>
-							<tr>
-								<td style="vertical-align:middle">
-									<input type="text" id="s3" value="{{selectedTournament.brackets.s3}}" style="width:100px" disabled><br>
-									<input type="text" id="s4" value="{{selectedTournament.brackets.s4}}" style="width:100px" disabled>
-								</td>
-							</tr>
-
-
-						</table>
-						-->
-
-						<table class="table table-condensed" style="margin-bottom:5px" 
+						<table class="table table-condensed" style="margin-bottom:5px"
 							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']"
 							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'">
 
@@ -284,7 +219,7 @@
 										{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
 									{{getPlayerName(match.p1_id)}}
 								</td>
-								
+
 								<td width="25%" align="right" style="vertical-align:middle">
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p1}}</span>
 								</td>
@@ -315,11 +250,11 @@
 
 								</td>
 							</tr>
-							
+
 						</table>
 					</div>
 
-				</div> 
+				</div>
 
 			</div> <!-- END OF TOURNAMENTS -->
 
@@ -344,7 +279,7 @@
 								<!-- <td align="center" width="10%">Jogos</td> -->
 								<th style="text-align:center" align="center" width="10%">Pontos</th>
 							</tr>
-							
+
 							<tr id="loadingplayers" ng-hide="listLoaded">
 								<td colspan="4" align="center">
 									<img src="img/ajax-loader.gif">
@@ -373,19 +308,19 @@
 						</table>
 
 					</div>
-					
+
 				</div>
 
 				<div class="panel panel-default">
-					
+
 					<div id="matches" class="panel-heading">
 						<img src="img/picture.jpg" style="width: 55px;height:55px;float:left;margin-right:10px">
 						<h3>{{selectedPlayer.name}}</h3>
 					</div>
 					<div class="panel-body">
-						
-						<table class="table table-condensed" style="margin-bottom:5px" 
-							ng-repeat="match in playerMatchList | orderBy:['-tourn_id','_id']" 
+
+						<table class="table table-condensed" style="margin-bottom:5px"
+							ng-repeat="match in playerMatchList | orderBy:['-tourn_id','_id']"
 							ng-init="checkTournament(match)"
 							ng-class="(match.victory) ? 'list-group-item-success' : (match.score.set_p1==match.score.set_p2) ? 'list-group-item-custom' : 'list-group-item-danger'">
 
@@ -399,7 +334,7 @@
 									{{match.round}}
 								</td>
 								<td width="70%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
-									<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
+									<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'"
 									class="label">{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
 									{{getPlayerName(match.p1_id)}}
 								</td>
@@ -409,7 +344,7 @@
 							</tr>
 							<tr>
 								<td style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
-									<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'" 
+									<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'"
 									class="label">{{ (match.score.wo) ? ((match.score.set_p2!=0) ? "w" : "O") : match.score.set_p2 }}</span>
 									{{getPlayerName(match.p2_id)}}
 								</td>
@@ -417,11 +352,11 @@
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p2}}</span>
 								</td>
 							</tr>
-							
+
 						</table>
 					</div>
 
-				</div> 
+				</div>
 
 			</div>	<!-- END OF RANKING -->
 
