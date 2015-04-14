@@ -83,8 +83,6 @@
 
 							<tr ng-show="(selectedTournament.groups.length > 0)">
 								<td colspan="3" align="center">
-									<!-- <span class="label label-info">{{selectedTournament.groups[0].groupname}}</span>
-									<span class="label label-success">{{selectedTournament.groups[1].groupname}}</span> -->
 
 									<span ng-repeat="group in selectedTournament.groups"
 												ng-class="{'label-info' : (group.groupname == selectedTournament.groups[0].groupname),
@@ -96,20 +94,26 @@
 								</td>
 							</tr>
 
-							<tr ng-repeat="player in tournamentPlayerList | orderBy:['group','-tournamentpoints','name']"
+							<!-- INIT TRYING TO FIX THE COUNTER ON GROUPS
+
 							ng-init="($index+1 > selectedTournament.groups[0].players.lenght) ?
-							 					(($index+1 % selectedTournament.groups[0].players.lenght == 0) ?
-													groupPos = ($index+1/selectedTournament.groups[0].players.lenght)+1 :
-													groupPos = $index+1 - (Math.floor($index+1/selectedTournament.groups[0].players.lenght) * $index+1)) :
-											groupPos = $index+1"
-							ng-class="{'info' : (player.group == selectedTournament.groups[0].groupname),
+										(($index+1 % selectedTournament.groups[0].players.lenght == 0) ?
+											groupPos = ($index+1/selectedTournament.groups[0].players.lenght)+1 :
+											groupPos = $index+1 - (Math.floor($index+1/selectedTournament.groups[0].players.lenght) * $index+1)) :
+									groupPos = $index+1"
+
+							-->
+
+							<tr ng-repeat="player in tournamentPlayerList | orderBy:['group','-tournamentpoints','name']"
+
+									ng-class="{'info' : (player.group == selectedTournament.groups[0].groupname),
 												'success' : (player.group == selectedTournament.groups[1].groupname),
 												'warning' : (player.group == selectedTournament.groups[2].groupname),
 												'danger' : (player.group == selectedTournament.groups[3].groupname)}"
 							>
 								<td align="center" width="5%">
 									<strong>
-										{{ groupPos }}
+										{{ ( (selectedTournament.groups.length > 0) ? $index+1 : '' ) }}
 									</strong>
 								</td>
 								<td>
