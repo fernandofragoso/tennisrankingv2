@@ -21,7 +21,7 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 	$scope.filterTournamentMatches = function(tournamentId){
 		console.log("filterTournamentMatches");
 		$scope.tournamentLoaded = false;
-		
+
 		$scope.clearLists();
 
 		$scope.Tournament.get({id:tournamentId}, function(data){
@@ -35,10 +35,10 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 
 			$scope.tournamentLoaded = true;
 		});
-		
+
 		// element_to_scroll_to = document.getElementById('tournmatches');
 		// element_to_scroll_to.scrollIntoView();
-		
+
 	};
 
 	//FILTER PLAYERS PER TOURNAMENT
@@ -47,10 +47,10 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 
 		for (var i = 0; i<$scope.playerList.length; i++){
 			if ($scope.selectedTournament.players.indexOf($scope.playerList[i]._id)!=-1){
-				
+
 				//CHECKS IF TOURNAMENT HAVE GROUPS
 				if($scope.selectedTournament.groups.length > 0){
-					
+
 					//FIND PLAYER GROUP
 					for(var j = 0;j<$scope.selectedTournament.groups.length;j++){
 						if($scope.selectedTournament.groups[j].players.indexOf($scope.playerList[i]._id)!=-1){
@@ -84,29 +84,29 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 
 	//UPDATE RANKING RESULTS
 	$scope.updateRanking = function(){
-		
+
 		for (var i=0; i < $scope.tournamentPlayerList.length; i++) {
-			
+
 			$scope.tournamentPlayerList[i].tournamentpoints = 0;
 
 			for (var j=0; j < $scope.tournamentMatchList.length; j++) {
-				
+
 				if ($scope.tournamentMatchList[j].score == undefined) {
 					continue;
-				} 
-				
-				if ($scope.tournamentMatchList[j].p1_id == $scope.tournamentPlayerList[i].id 
-					|| $scope.tournamentMatchList[j].player2 == $scope.tournamentPlayerList[i].id){
-				
-					$scope.tournamentPlayerList[i].tournamentpoints += 
-						$scope.calculatePoints($scope.tournamentPlayerList[i],$scope.tournamentMatchList[j]);
-				
 				}
-				
+
+				if ($scope.tournamentMatchList[j].p1_id == $scope.tournamentPlayerList[i].id
+					|| $scope.tournamentMatchList[j].player2 == $scope.tournamentPlayerList[i].id){
+
+					$scope.tournamentPlayerList[i].tournamentpoints +=
+						$scope.calculatePoints($scope.tournamentPlayerList[i],$scope.tournamentMatchList[j]);
+
+				}
+
 			};
-			
+
 		};
-		
+
 	};
 
 	//CALCULATE TOURNAMENT POINTS
@@ -116,35 +116,35 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 	// LOSE BY WO = 0
 	//
 	$scope.calculatePoints = function(player, match){
-		
+
 		var points = 0;
-		
+
 		if (match.round == "RR"){
 
 			if (match.p1_id == player._id){
-				
+
 				if (match.score.wo) {
 					if (match.score.set_p1 > match.score.set_p2){
 						points += 3;
 					}
-				} 
+				}
 				else if (match.score.set_p1 == match.score.set_p2) {
 					return 0;
-				}	
+				}
 				else if (match.score.set_p1 > match.score.set_p2) {
 					points += 3;
 				} else {
 					points += 1;
 				}
 				points += match.score.set_p1;
-				
+
 			} else if (match.p2_id == player._id) {
-				
+
 				if (match.score.wo) {
 					if (match.score.set_p2 > match.score.set_p1){
 						points += 3;
 					}
-				} 
+				}
 				else if (match.score.set_p1 == match.score.set_p2) {
 					return 0;
 				}
@@ -154,18 +154,18 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 					points += 1;
 				}
 				points += match.score.set_p2;
-				
+
 			}
 
 		}
-		
+
 		return points;
 	};
-	
+
 	$scope.saveTournament = function(tournament){
 		$scope.Tournament.update({ _id:tournament._id },tournament);
 		alert("Chaves atualizadas");
 	};
-	
+
 
 }]);

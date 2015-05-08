@@ -105,7 +105,6 @@
 							-->
 
 							<tr ng-repeat="player in tournamentPlayerList | orderBy:['group','-tournamentpoints','name']"
-
 									ng-class="{'info' : (player.group == selectedTournament.groups[0].groupname),
 												'success' : (player.group == selectedTournament.groups[1].groupname),
 												'warning' : (player.group == selectedTournament.groups[2].groupname),
@@ -217,13 +216,15 @@
 									</a>
 								</td>
 							</tr>
-
-
 						</table>
 
+						<select class="form-control" ng-model="playerFilter" name="playerFilter">
+							<option value="">Filtrar jogos por jogador:</option>
+							<option ng-repeat="player in tournamentPlayerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
+						</select>
 
 						<table class="table table-condensed" style="margin-bottom:5px"
-							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id']"
+							ng-repeat="match in tournamentMatchList | orderBy:['-tourn_id','_id'] | filter:playerFilter"
 							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'">
 
 							<tr>
