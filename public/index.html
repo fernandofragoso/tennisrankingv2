@@ -218,7 +218,7 @@
 							</tr>
 						</table>
 
-						<select class="form-control" ng-model="playerFilter" name="playerFilter">
+						<select ng-show="(selectedTournament.matches.length>0)" style="margin-bottom:5px" class="form-control" ng-model="playerFilter" name="playerFilter">
 							<option value="">Filtrar jogos por jogador:</option>
 							<option ng-repeat="player in tournamentPlayerList | orderBy:['name']" value="{{player._id}}">{{player.name}}</option>
 						</select>
