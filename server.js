@@ -36,7 +36,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 mongoose.connect('mongodb://heroku_app32612022:1aep7n66hoodpnpdsr4fpoi3g0@ds027741.mongolab.com:27741/heroku_app32612022',
 	function(err){
 		if(err){
-			console.log("######## NO DB CONNECTION!! ########" + err);
+			console.log("######## NO DB CONNECTION!! ######## " + err);
 		}
 		// populateDB();
 	});
