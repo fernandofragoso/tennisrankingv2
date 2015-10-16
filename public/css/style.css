@@ -19,6 +19,10 @@
 .ng-valid.ng-dirty {
   border-color: #78FA89;
 }
+.bracket {
+	font-size:10px;
+	color:#000;
+}
 a.list-group-item-custom {
   color: #cccccc;
 }
