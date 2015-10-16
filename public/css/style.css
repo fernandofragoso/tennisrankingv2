@@ -19,7 +19,7 @@
 .ng-valid.ng-dirty {
   border-color: #78FA89;
 }
-.bracket {
+.bracket, .bracket:disabled {
 	font-size:10px;
 	color:#000;
 }
