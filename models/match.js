@@ -3,11 +3,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //SCHEMA
-var schema = new Schema({ 
+var schema = new Schema({
 	tourn_id: Schema.ObjectId,
 	p1_id: Schema.ObjectId,
 	p2_id: Schema.ObjectId,
-	round: { type: String, enum: ["RR", "R32", "R16", "R8", "Q", "S", "F"] },
+	round: { type: String, enum: ["RR", "R32", "R16", "Q", "S", "F"] },
 	score: {
 		set_p1: Number,
 		set_p2: Number,
