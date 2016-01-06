@@ -124,7 +124,16 @@
 
 						</table>
 
+						<div id='brackets_menu' ng-show="(selectedTournament.brackets_b.type)">
 
+							<ul class="nav nav-tabs" style="margin-bottom:10px;" ng-controller="PageController">
+								<li id="tab_bracket_a" role="presentation" class="active"><a ng-click="showBracket(1)">Chave A</a></li>
+								<li id="tab_bracket_b" role="presentation"><a ng-click="showBracket(2)">Chave B</a></li>
+							</ul>
+
+						</div>
+
+						<div id='brackets'>
 						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type)">
 
 							<tr bgcolor="#EEE">
@@ -217,7 +226,9 @@
 								</td>
 							</tr>
 						</table>
+						</div>
 
+						<div id='brackets_b' style='display:none;'>
 						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets_b.type)">
 
 						  <tr bgcolor="#EEE">
@@ -310,6 +321,7 @@
 						    </td>
 						  </tr>
 						</table>
+						</div>
 
 						<select ng-show="(selectedTournament.matches.length>0)" style="margin-bottom:5px" class="form-control" ng-model="playerFilter" name="playerFilter">
 							<option value="">Filtrar jogos por jogador:</option>

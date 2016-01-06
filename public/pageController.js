@@ -269,7 +269,7 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 		} else {
 			$scope.updatePlayerList(function(){});
 		}
-		
+
 		if ($scope.matchId) {
 			console.log("UPDATE");
 			$scope.Match.update({ _id:$scope.matchId },this.match);
@@ -289,7 +289,7 @@ rankingApp.controller("PageController",['$scope', function($scope){
 	$scope.showTab = function(num) {
 
 		// $scope.updatePlayerList(function(){});
-	    
+
 		switch(num){
 			case 1:
 				$("#tab_ranking").addClass("active");
@@ -309,10 +309,32 @@ rankingApp.controller("PageController",['$scope', function($scope){
 
 	}
 
+	$scope.showBracket = function(num) {
+
+		// $scope.updatePlayerList(function(){});
+
+		switch(num){
+			case 1:
+				$("#tab_bracket_a").addClass("active");
+				$("#tab_bracket_b").removeClass("active");
+				$("#brackets").show();
+				$("#brackets_b").hide();
+				break;
+			case 2:
+				$("#tab_bracket_a").removeClass("active");
+				$("#tab_bracket_b").addClass("active");
+				$("#brackets").hide();
+				$("#brackets_b").show();
+				break;
+			default:
+				break;
+		}
+
+	}
+
 	$scope.logout = function(user){
 		console.log("logout");
 		$scope.session.clearSession();
 	}
 
 }]);
-
