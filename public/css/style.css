@@ -19,10 +19,13 @@
 .ng-valid.ng-dirty {
   border-color: #78FA89;
 }
+.table tbody tr td {
+	padding: 8px 0 8px 0;
+}
 .bracket {
 	font-size:10px;
 	color:#000;
-	width:65px;
+	width:60px;
 }
 .bracket:disabled {
 	-webkit-text-fill-color: rgba(0, 0, 0, 1); -webkit-opacity: 1; background: white;

@@ -128,7 +128,7 @@
 						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type)">
 
 							<tr bgcolor="#EEE">
-								<th ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">R8</th>
+								<th ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">R16</th>
 								<th ng-hide="(selectedTournament.brackets.type == 'S')">QF</th>
 								<th>SF</th>
 								<th>Final</th>
@@ -210,7 +210,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td ng-show="(session.data)" colspan="3">
+								<td ng-show="(session.data)" colspan="4">
 									<a ng-click="saveTournament(selectedTournament)" class="btn btn-primary btn-xs">
 										Salvar Chaves
 									</a>
@@ -221,7 +221,7 @@
 						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets_b.type)">
 
 						  <tr bgcolor="#EEE">
-						    <th ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">R8</th>
+						    <th ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">R16</th>
 						    <th ng-hide="(selectedTournament.brackets_b.type == 'S')">QF</th>
 						    <th>SF</th>
 						    <th>Final</th>
@@ -303,7 +303,7 @@
 						    </td>
 						  </tr>
 						  <tr>
-						    <td ng-show="(session.data)" colspan="3">
+						    <td ng-show="(session.data)" colspan="4">
 						      <a ng-click="saveTournament(selectedTournament)" class="btn btn-primary btn-xs">
 						        Salvar Chaves
 						      </a>
