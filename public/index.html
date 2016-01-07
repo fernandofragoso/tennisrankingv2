@@ -27,7 +27,7 @@
 				<li id="tab_ranking" role="presentation"><a ng-click="showTab(1)">Ranking Geral</a></li>
 				<!-- <li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a> -->
 				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right">
-					<a ng-click="logout()" href="#">{{session.data.login}} (Logout)</a></li>
+					<a ng-click="logout()" href="#">(Logout)</a></li>
 				<li id="tab_login" ng-hide="(session.data)" role="presentation" class="pull-right"><a href="/#/login">Login</a></li>
 			</ul>
 
@@ -134,7 +134,7 @@
 						</div>
 
 						<div id='brackets'>
-						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type)">
+						<table align="center" style="text-align:center;width:300px;" class="table table-bordered table-brackets" ng-show="(selectedTournament.brackets.type)">
 
 							<tr bgcolor="#EEE">
 								<th ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">R16</th>
@@ -229,7 +229,7 @@
 						</div>
 
 						<div id='brackets_b' style='display:none;'>
-						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets_b.type)">
+						<table align="center" style="text-align:center;width:300px;" class="table table-bordered table-brackets" ng-show="(selectedTournament.brackets_b.type)">
 
 						  <tr bgcolor="#EEE">
 						    <th ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">R16</th>
