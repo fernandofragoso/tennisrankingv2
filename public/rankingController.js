@@ -17,10 +17,10 @@ rankingApp.directive('confirmationNeeded', function () {
 rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$location', 'Session', function($scope, $timeout, $resource, $location, Session){
 
 	//$RESOURCE CONFIGURATION
-	$scope.Player = $resource('/api/players/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
-	$scope.Tournament = $resource('/api/tournaments/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
-	$scope.Match = $resource('/api/matches/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
-	$scope.User = $resource('/adm/login',
+	$scope.Player = $resource('http://tenisranking.herokuapp.com/api/players/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
+	$scope.Tournament = $resource('http://tenisranking.herokuapp.com/api/tournaments/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
+	$scope.Match = $resource('http://tenisranking.herokuapp.com/api/matches/:id', {id:'@_id'}, { 'update': {method:'PUT'} });
+	$scope.User = $resource('http://tenisranking.herokuapp.com/adm/login',
 		null,
 		{ 'login': {
 			method: 'POST',
