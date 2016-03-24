@@ -101,9 +101,9 @@ router.route('/players/:id')
 			} else {
 
 			}
-			
+
 		});
-		
+
 	});
 
 //TOURNAMENTS API
@@ -150,9 +150,9 @@ router.route('/tournaments/:id')
 						tournament.matches = rows;
 						res.json(tournament);
 					}
-					
+
 				});
-				
+
 			}
 		});
 	})
@@ -182,9 +182,9 @@ router.route('/tournaments/:id')
 			} else {
 
 			}
-			
+
 		});
-		
+
 	});
 
 //MATCHES API
@@ -205,6 +205,7 @@ router.route('/matches')
 		model.p1_id = req.body.p1_id;
 		model.p2_id = req.body.p2_id;
 		model.round = req.body.round;
+		model.bracket_b = req.body.bracket_b;
 		model.score = req.body.score;
 
 		model.save(function(err){
@@ -253,9 +254,9 @@ router.route('/matches/:id')
 			} else {
 
 			}
-			
+
 		});
-		
+
 	});
 
 //POPULATE DB - PLAYERS
