@@ -282,6 +282,7 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 
 		} else {
 			console.log("SAVE");
+			console.log(this.match.bracket_b);
 			$scope.Match.save(this.match, function(data){
 				console.log("Saved");
 			});
