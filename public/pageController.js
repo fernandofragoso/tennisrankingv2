@@ -40,6 +40,8 @@ rankingApp.factory('Session', function(){
 
 rankingApp.controller("LoginController",['$scope','$window','$routeParams','Session', function($scope, $window, $routeParams, Session){
 
+	Session.data = "FERNANDO";
+
 	$('#loginmodal').modal('show');
 
 	$('#loginmodal').on('hidden.bs.modal', function () {
@@ -199,15 +201,22 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 		//CALCULATE POINTS
 		//
 		//RR - 10/5
-		//R32 - 10
-		//R16 - 10
-		//R8 - 10
+		//R32 - 20
+		//R16 - 20
 		//Q - 20
-		//S - 20
-		//F - 50/20
+		//S - 40
+		//F - 120/60
 		//
+		//BRACKET_B - 25%
+
 		var points_p1 = 0;
 		var points_p2 = 0;
+
+		//BRACKET B GIVES 25% OF POINTS
+		var multiplier = 1;
+		if (this.match.bracket_b) {
+			multiplier = 0.25;
+		}
 
 		if (this.match.score.set_p1!=this.match.score.set_p2) {
 
@@ -230,22 +239,21 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 					break;
 				case "R32":
 				case "R16":
-				case "R8":
-					points_p1 += 10;
-					points_p2 += 10;
-					break;
 				case "Q":
+					points_p1 += 20 * multiplier;
+					points_p2 += 20 * multiplier;
+					break;
 				case "S":
-					points_p1 += 20;
-					points_p2 += 20;
+					points_p1 += 40 * multiplier;
+					points_p2 += 40 * multiplier;
 					break;
 				case "F":
-					points_p1 += 20;
-					points_p2 += 20;
+					points_p1 += 60 * multiplier;
+					points_p2 += 60 * multiplier;
 					if (this.match.score.set_p1>this.match.score.set_p2){
-						points_p1 += 30;
+						points_p1 += 60 * multiplier;
 					} else {
-						points_p2 += 30;
+						points_p2 += 60 * multiplier;
 					}
 					break;
 			}
@@ -269,7 +277,7 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 		} else {
 			$scope.updatePlayerList(function(){});
 		}
-		
+
 		if ($scope.matchId) {
 			console.log("UPDATE");
 			$scope.Match.update({ _id:$scope.matchId },this.match);
@@ -289,7 +297,7 @@ rankingApp.controller("PageController",['$scope', function($scope){
 	$scope.showTab = function(num) {
 
 		// $scope.updatePlayerList(function(){});
-	    
+
 		switch(num){
 			case 1:
 				$("#tab_ranking").addClass("active");
@@ -309,10 +317,32 @@ rankingApp.controller("PageController",['$scope', function($scope){
 
 	}
 
+	$scope.showBracket = function(num) {
+
+		// $scope.updatePlayerList(function(){});
+
+		switch(num){
+			case 1:
+				$("#tab_bracket_a").addClass("active");
+				$("#tab_bracket_b").removeClass("active");
+				$("#brackets").show();
+				$("#brackets_b").hide();
+				break;
+			case 2:
+				$("#tab_bracket_a").removeClass("active");
+				$("#tab_bracket_b").addClass("active");
+				$("#brackets").hide();
+				$("#brackets_b").show();
+				break;
+			default:
+				break;
+		}
+
+	}
+
 	$scope.logout = function(user){
 		console.log("logout");
 		$scope.session.clearSession();
 	}
 
 }]);
-

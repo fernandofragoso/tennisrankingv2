@@ -26,6 +26,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 //BRAGA WIN
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -36,7 +42,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 mongoose.connect('mongodb://heroku_app32612022:1aep7n66hoodpnpdsr4fpoi3g0@ds027741.mongolab.com:27741/heroku_app32612022',
 	function(err){
 		if(err){
-			console.log("######## NO DB CONNECTION!! ########");
+			console.log("######## NO DB CONNECTION!! ######## " + err);
 		}
 		// populateDB();
 	});

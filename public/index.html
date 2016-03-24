@@ -27,7 +27,7 @@
 				<li id="tab_ranking" role="presentation"><a ng-click="showTab(1)">Ranking Geral</a></li>
 				<!-- <li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a> -->
 				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right">
-					<a ng-click="logout()" href="#">{{session.data.login}} (Logout)</a></li>
+					<a ng-click="logout()" href="#">(Logout)</a></li>
 				<li id="tab_login" ng-hide="(session.data)" role="presentation" class="pull-right"><a href="/#/login">Login</a></li>
 			</ul>
 
@@ -124,99 +124,204 @@
 
 						</table>
 
+						<div id='brackets_menu' ng-show="(selectedTournament.brackets_b.type)">
 
-						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets.type)">
+							<ul class="nav nav-tabs" style="margin-bottom:10px;" ng-controller="PageController">
+								<li id="tab_bracket_a" role="presentation" class="active"><a ng-click="showBracket(1)">Chave A</a></li>
+								<li id="tab_bracket_b" role="presentation"><a ng-click="showBracket(2)">Chave B</a></li>
+							</ul>
+
+						</div>
+
+						<div id='brackets'>
+						<table align="center" style="text-align:center;width:300px;" class="table table-bordered table-brackets" ng-show="(selectedTournament.brackets.type)">
 
 							<tr bgcolor="#EEE">
-								<th ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">R8</th>
+								<th ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">R16</th>
 								<th ng-hide="(selectedTournament.brackets.type == 'S')">QF</th>
 								<th>SF</th>
 								<th>Final</th>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.81" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.82" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.81" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.82" ng-disabled="(!session.data)">
 								</td>
 								<td ng-hide="(selectedTournament.brackets.type == 'S')" style="vertical-align:middle" rowspan="2">
-									<input type="text" ng-model="selectedTournament.brackets.q1" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.q2" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q1" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q2" ng-disabled="(!session.data)">
 								</td>
 								<td style="vertical-align:middle" rowspan="4">
-									<input type="text" ng-model="selectedTournament.brackets.s1" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.s2" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.s1" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.s2" ng-disabled="(!session.data)">
 								</td>
 								<td style="vertical-align:middle" rowspan="8">
-									<input type="text" ng-model="selectedTournament.brackets.f1" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.f2" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.f1" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.f2" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.83" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.84" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.83" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.84" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.85" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.86" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.85" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.86" ng-disabled="(!session.data)">
 								</td>
 								<td ng-hide="(selectedTournament.brackets.type == 'S')" style="vertical-align:middle" rowspan="2">
-									<input type="text" ng-model="selectedTournament.brackets.q3" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.q4" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q3" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q4" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.87" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.88" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.87" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.88" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.89" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.810" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.89" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.810" ng-disabled="(!session.data)">
 								</td>
 								<td ng-hide="(selectedTournament.brackets.type == 'S')" style="vertical-align:middle" rowspan="2">
-									<input type="text" ng-model="selectedTournament.brackets.q5" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.q6" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q5" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q6" ng-disabled="(!session.data)">
 								</td>
 								<td style="vertical-align:middle" rowspan="4">
-									<input type="text" ng-model="selectedTournament.brackets.s3" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.s4" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.s3" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.s4" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.811" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.812" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.811" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.812" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.813" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.814" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.813" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.814" ng-disabled="(!session.data)">
 								</td>
 								<td ng-hide="(selectedTournament.brackets.type == 'S')" style="vertical-align:middle" rowspan="2">
-									<input type="text" ng-model="selectedTournament.brackets.q7" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.q8" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q7" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.q8" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
 								<td ng-hide="(selectedTournament.brackets.type == 'Q')||(selectedTournament.brackets.type == 'S')">
-									<input type="text" ng-model="selectedTournament.brackets.815" style="width:65px" ng-disabled="(!session.data)"><br>
-									<input type="text" ng-model="selectedTournament.brackets.816" style="width:65px" ng-disabled="(!session.data)">
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.815" ng-disabled="(!session.data)"><br>
+									<input class='bracket' type="text" ng-model="selectedTournament.brackets.816" ng-disabled="(!session.data)">
 								</td>
 							</tr>
 							<tr>
-								<td ng-show="(session.data)" colspan="3">
+								<td ng-show="(session.data)" colspan="4">
 									<a ng-click="saveTournament(selectedTournament)" class="btn btn-primary btn-xs">
 										Salvar Chaves
 									</a>
 								</td>
 							</tr>
 						</table>
+						</div>
+
+						<div id='brackets_b' style='display:none;'>
+						<table align="center" style="text-align:center;width:300px;" class="table table-bordered table-brackets" ng-show="(selectedTournament.brackets_b.type)">
+
+						  <tr bgcolor="#EEE">
+						    <th ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">R16</th>
+						    <th ng-hide="(selectedTournament.brackets_b.type == 'S')">QF</th>
+						    <th>SF</th>
+						    <th>Final</th>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.81" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.82" ng-disabled="(!session.data)">
+						    </td>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'S')" style="vertical-align:middle" rowspan="2">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q1" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q2" ng-disabled="(!session.data)">
+						    </td>
+						    <td style="vertical-align:middle" rowspan="4">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.s1" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.s2" ng-disabled="(!session.data)">
+						    </td>
+						    <td style="vertical-align:middle" rowspan="8">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.f1" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.f2" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.83" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.84" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.85" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.86" ng-disabled="(!session.data)">
+						    </td>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'S')" style="vertical-align:middle" rowspan="2">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q3" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q4" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.87" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.88" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.89" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.810" ng-disabled="(!session.data)">
+						    </td>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'S')" style="vertical-align:middle" rowspan="2">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q5" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q6" ng-disabled="(!session.data)">
+						    </td>
+						    <td style="vertical-align:middle" rowspan="4">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.s3" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.s4" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.811" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.812" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.813" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.814" ng-disabled="(!session.data)">
+						    </td>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'S')" style="vertical-align:middle" rowspan="2">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q7" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.q8" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-hide="(selectedTournament.brackets_b.type == 'Q')||(selectedTournament.brackets_b.type == 'S')">
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.815" ng-disabled="(!session.data)"><br>
+						      <input class='bracket' type="text" ng-model="selectedTournament.brackets_b.816" ng-disabled="(!session.data)">
+						    </td>
+						  </tr>
+						  <tr>
+						    <td ng-show="(session.data)" colspan="4">
+						      <a ng-click="saveTournament(selectedTournament)" class="btn btn-primary btn-xs">
+						        Salvar Chaves
+						      </a>
+						    </td>
+						  </tr>
+						</table>
+						</div>
 
 						<table align="center" style="text-align:center;width:300px;" class="table table-bordered" ng-show="(selectedTournament.brackets_b.type)">
 
@@ -322,12 +427,12 @@
 
 							<tr>
 								<td width="5%" rowspan="2" style="text-align:center;vertical-align:middle">
-									{{match.round}}
+									{{match.round}}<span ng-show="match.bracket_b">*</span>
 								</td>
 								<td width="50%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
 									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
 										{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
-									{{getPlayerName(match.p1_id)}}
+									<span style='white-space:nowrap'>{{getPlayerName(match.p1_id)}}</span>
 								</td>
 
 								<td width="25%" align="right" style="vertical-align:middle">
@@ -338,7 +443,7 @@
 								<td style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
 									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
 										{{ (match.score.wo) ? ((match.score.set_p2!=0) ? "w" : "O") : match.score.set_p2 }}</span>
-									{{getPlayerName(match.p2_id)}}
+									<span style='white-space:nowrap'>{{getPlayerName(match.p2_id)}}</span>
 								</td>
 								<td align="right" style="vertical-align:middle">
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p2}}</span>
@@ -409,9 +514,10 @@
 								<td colspan="3" align="center" style="font-size: 10px">
 									<strong>Pontuação</strong><br/>
 									<strong>RR:</strong> 10 (Vencedor) / 5 (Perdedor) -
+									<strong>R16:</strong> 20 -
 									<strong>Q:</strong> 20 -
-									<strong>S:</strong> 20 -
-									<strong>F:</strong> 50 (Campeão) / 20 (Vice)
+									<strong>S:</strong> 40 -
+									<strong>F:</strong> 120 (Campeão) / 60 (Vice)
 								</td>
 							</tr>
 
@@ -441,12 +547,12 @@
 							<tr>
 							<tr>
 								<td width="10%" rowspan="2" style="text-align:center;vertical-align:middle">
-									{{match.round}}
+									{{match.round}}<span ng-show="match.bracket_b">*</span>
 								</td>
 								<td width="70%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
 									<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'"
 									class="label">{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
-									{{getPlayerName(match.p1_id)}}
+									<span style='white-space:nowrap'>{{getPlayerName(match.p1_id)}}</span>
 								</td>
 								<td width="20%" align="right" style="vertical-align:middle">
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p1}}</span>
@@ -456,7 +562,7 @@
 								<td style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
 									<span ng-class="(match.victory) ? 'label-success' : (match.score.set_p1==match.score.set_p2) ? 'label-default' : 'label-danger'"
 									class="label">{{ (match.score.wo) ? ((match.score.set_p2!=0) ? "w" : "O") : match.score.set_p2 }}</span>
-									{{getPlayerName(match.p2_id)}}
+									<span style='white-space:nowrap'>{{getPlayerName(match.p2_id)}}</span>
 								</td>
 								<td align="right" style="vertical-align:middle">
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p2}}</span>

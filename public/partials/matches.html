@@ -7,7 +7,7 @@
         <h4 class="modal-title" ng-show="(matchId)">Editar Partida</h4>
       </div>
       <div class="modal-body">
-        
+
       <form name="formmatches" role="form" novalidate>
   		    <div class="form-group">
   		        <label>Torneio:</label>
@@ -98,7 +98,6 @@
               <option value="RR">RR</option>
               <option value="R32">R32</option>
               <option value="R16">R16</option>
-              <option value="R8">R8</option>
               <option value="Q">Q</option>
               <option value="S">S</option>
               <option value="F">F</option>
@@ -107,12 +106,17 @@
             <input ng-show="(matchId)" type="text" ng-model="match.round" style="display:none">
           </div>
 
+          <div class="form-group">
+            <input type="checkbox" ng-model="match.bracket_b">
+            <label>Chave B</label>gt 
+          </div>
+
   		</form>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" 
+        <button type="button" class="btn btn-primary"
           ng-disabled="formmatches.$invalid" ng-click="submit()" data-dismiss="modal">Ok</button>
       </div>
     </div><!-- /.modal-content -->
