@@ -48,3 +48,6 @@ a.list-group-item-custom.active:focus {
   background-color: #cccccc;
   border-color: #cccccc;
 }
+small {
+	font-size: 70%;
+}
