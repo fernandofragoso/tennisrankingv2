@@ -40,8 +40,6 @@ rankingApp.factory('Session', function(){
 
 rankingApp.controller("LoginController",['$scope','$window','$routeParams','Session', function($scope, $window, $routeParams, Session){
 
-	Session.data = "FERNANDO";
-
 	$('#loginmodal').modal('show');
 
 	$('#loginmodal').on('hidden.bs.modal', function () {
