@@ -336,13 +336,12 @@
 								<td width="5%" rowspan="2" style="text-align:center;vertical-align:middle">
 									{{match.round}}<span ng-show="match.bracket_b">*</span>
 								</td>
-								<td width="50%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
+								<td width="75%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
 									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
 										{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
 									<span style='white-space:nowrap'>{{getPlayerName(match.p1_id)}}</span>
 								</td>
-
-								<td width="25%" align="right" style="vertical-align:middle">
+								<td width="20%" align="right" style="vertical-align:middle">
 									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p1}}</span>
 								</td>
 							</tr>
