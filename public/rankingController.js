@@ -118,6 +118,23 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
     	var points_p1 = 0;
     	var points_p2 = 0;
 
+      //CALCULATE POINTS
+  		//
+  		//RR - 10/5
+  		//R32 - 20
+  		//R16 - 20
+  		//Q - 20
+  		//S - 40
+  		//F - 120/60
+  		//
+  		//BRACKET_B - 25%
+
+      //BRACKET B GIVES 25% OF POINTS
+  		var multiplier = 1;
+  		if (match.bracket_b) {
+  			multiplier = 0.25;
+  		}
+
     	//IF THE MATCH IS ALREADY FINISHED, REMOVE POINTS
     	if(match.score.set_p1==0 && match.score.set_p2==0){
     		$scope.Match.remove({id:match._id});
@@ -140,20 +157,20 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 			    		}
 	    				break;
 	    			case "R32":
-					case "R16":
-					case "R8":
-						points_p1 = -10;
-						points_p2 = -10;
-						break;
-					case "S":
-						points_p1 = -20;
-						points_p2 = -20;
-						break;
-					case "F":
-						points_p1 = -50;
-						points_p2 = -20;
-						break;
-	    		}
+					  case "R16":
+            case "Q":
+  						points_p1 = -20;
+  						points_p2 = -20;
+  						break;
+  					case "S":
+  						points_p1 = -40;
+  						points_p2 = -40;
+  						break;
+  					case "F":
+  						points_p1 = -120;
+  						points_p2 = -60;
+  						break;
+  	    		}
 
 	    	} else {
 
@@ -171,20 +188,20 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 			    		}
 	    				break;
 	    			case "R32":
-					case "R16":
-					case "R8":
-						points_p1 = -10;
-						points_p2 = -10;
-						break;
-					case "S":
-						points_p1 = -20;
-						points_p2 = -20;
-						break;
-					case "F":
-						points_p1 = -20;
-						points_p2 = -50;
-						break;
-	    		}
+  					case "R16":
+  					case "Q":
+  						points_p1 = -20;
+  						points_p2 = -20;
+  						break;
+  					case "S":
+  						points_p1 = -40;
+  						points_p2 = -40;
+  						break;
+  					case "F":
+  						points_p1 = -60;
+  						points_p2 = -120;
+  						break;
+  	    		}
 
 	    	}
 
@@ -193,10 +210,10 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 				var player1 = $scope.findPlayerById(match.p1_id);
 				var player2 = $scope.findPlayerById(match.p2_id);
 
-				player1.points += points_p1;
+				player1.points += points_p1 * multiplier;
 				$scope.Player.update({ id:player1._id }, player1);
 
-				player2.points += points_p2;
+				player2.points += points_p2 * multiplier;
 				$scope.Player.update({ id:player2._id }, player2);
 
 			});
