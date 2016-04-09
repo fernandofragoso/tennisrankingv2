@@ -301,14 +301,26 @@ rankingApp.controller("PageController",['$scope', function($scope){
 			case 1:
 				$("#tab_ranking").addClass("active");
 				$("#tab_tournaments").removeClass("active");
+				$("#tab_live").removeClass("active");
 				$("#div_ranking").show();
 				$("#div_tournaments").hide();
+				$("#div_live").hide();
 				break;
 			case 2:
 				$("#tab_ranking").removeClass("active");
 				$("#tab_tournaments").addClass("active");
+				$("#tab_live").removeClass("active");
 				$("#div_ranking").hide();
 				$("#div_tournaments").show();
+				$("#div_live").hide();
+				break;
+			case 3:
+				$("#tab_ranking").removeClass("active");
+				$("#tab_tournaments").removeClass("active");
+				$("#tab_live").addClass("active");
+				$("#div_ranking").hide();
+				$("#div_tournaments").hide();
+				$("#div_live").show();
 				break;
 			default:
 				break;

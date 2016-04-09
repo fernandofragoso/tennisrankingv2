@@ -25,6 +25,7 @@
 			<ul class="nav nav-tabs" style="margin-bottom:10px;" ng-controller="PageController">
 				<li id="tab_tournaments" role="presentation" class="active"><a ng-click="showTab(2)">Torneios</a></li>
 				<li id="tab_ranking" role="presentation"><a ng-click="showTab(1)">Ranking Geral</a></li>
+				<li id="tab_live" role="presentation"><a ng-click="showTab(3)">Ao Vivo</a></li>
 				<!-- <li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a> -->
 				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right">
 					<a ng-click="logout()" href="#">(Logout)</a></li>
@@ -476,6 +477,101 @@
 							</tr>
 
 						</table>
+					</div>
+
+				</div>
+
+			</div>	<!-- END OF RANKING -->
+
+			<div id="div_live" style="display:none;">
+
+				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<img src="img/live.png" style="width: 55px;height:55px;float:left;margin-right:10px">
+						<h3>Ao vivo</h3>
+					</div>
+					<div class="panel-body">
+
+						<table class="table table-condensed" style="margin-bottom:5px">
+
+							<tr>
+								<td colspan="5" style="background:#FFF;color:#000">
+									 <strong>Torneio:</strong> Nome do torneio
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" width="48%" style="text-align:right;vertical-align:middle">
+									<h4>Jogador 1</h4>
+								</td>
+								<td width="4%" style="text-align:center;vertical-align:middle">
+									x
+								</td>
+								<td colspan="2" width="48%" style="text-align:left;vertical-align:middle">
+									<h4>Jogador 2</h4>
+								</td>
+							</tr>
+
+							<tr>
+								<td width="18%" style="text-align:center;vertical-align:middle">
+									<button type="button" class="btn btn-primary btn-sm btn-block">+</button>
+									<button type="button" class="btn btn-default btn-sm btn-block">-</button>
+								</td>
+								<td width="30%" style="text-align:right;vertical-align:middle">
+									<h2>7</h2>
+								</td>
+								<td style="text-align:center;vertical-align:middle">
+
+								</td>
+								<td width="30%" style="text-align:left;vertical-align:middle">
+									<h2>5</h2>
+								</td>
+								<td width="18%" style="text-align:center;vertical-align:middle">
+									<button type="button" class="btn btn-primary btn-sm btn-block">+</button>
+									<button type="button" class="btn btn-default btn-sm btn-block">-</button>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;vertical-align:middle">
+									<button type="button" class="btn btn-primary btn-sm btn-block">+</button>
+									<button type="button" class="btn btn-default btn-sm btn-block">-</button>
+								</td>
+								<td style="text-align:right;vertical-align:middle">
+									<h2>4</h2>
+								</td>
+								<td style="text-align:center;vertical-align:middle">
+
+								</td>
+								<td style="text-align:left;vertical-align:middle">
+									<h2>6</h2>
+								</td>
+								<td style="text-align:center;vertical-align:middle">
+									<button type="button" class="btn btn-primary btn-sm btn-block">+</button>
+									<button type="button" class="btn btn-default btn-sm btn-block">-</button>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:center;vertical-align:middle">
+									<button type="button" class="btn btn-primary btn-sm btn-block">+</button>
+									<button type="button" class="btn btn-default btn-sm btn-block">-</button>
+								</td>
+								<td style="text-align:right;vertical-align:middle">
+									<h2>0</h2>
+								</td>
+								<td style="text-align:center;vertical-align:middle">
+
+								</td>
+								<td style="text-align:left;vertical-align:middle">
+									<h2>0</h2>
+								</td>
+								<td style="text-align:center;vertical-align:middle">
+									<button type="button" class="btn btn-primary btn-sm btn-block">+</button>
+									<button type="button" class="btn btn-default btn-sm btn-block">-</button>
+								</td>
+							</tr>
+
+						</table>
+
 					</div>
 
 				</div>
