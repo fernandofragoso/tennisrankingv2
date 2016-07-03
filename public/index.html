@@ -88,7 +88,11 @@
 												ng-class="{'label-info' : (group.groupname == selectedTournament.groups[0].groupname),
 																	'label-success' : (group.groupname == selectedTournament.groups[1].groupname),
 																	'label-warning' : (group.groupname == selectedTournament.groups[2].groupname),
-																	'label-danger' : (group.groupname == selectedTournament.groups[3].groupname)}"
+																	'label-danger' : (group.groupname == selectedTournament.groups[3].groupname)
+																	'label-info' : (group.groupname == selectedTournament.groups[4].groupname),
+																	'label-success' : (group.groupname == selectedTournament.groups[5].groupname),
+																	'label-warning' : (group.groupname == selectedTournament.groups[6].groupname),
+																	'label-danger' : (group.groupname == selectedTournament.groups[7].groupname)}"
 											  class="label"> {{group.groupname}} </span>
 
 								</td>
@@ -108,8 +112,11 @@
 									ng-class="{'info' : (player.group == selectedTournament.groups[0].groupname),
 												'success' : (player.group == selectedTournament.groups[1].groupname),
 												'warning' : (player.group == selectedTournament.groups[2].groupname),
-												'danger' : (player.group == selectedTournament.groups[3].groupname)}"
-							>
+												'danger' : (player.group == selectedTournament.groups[3].groupname),
+												'info' : (player.group == selectedTournament.groups[4].groupname),
+												'success' : (player.group == selectedTournament.groups[5].groupname),
+												'warning' : (player.group == selectedTournament.groups[6].groupname),
+												'danger' : (player.group == selectedTournament.groups[7].groupname)}">
 								<td align="center" width="5%">
 									<strong>
 										{{ ( (selectedTournament.groups.length == 0) ? $index+1 : '' ) }}
