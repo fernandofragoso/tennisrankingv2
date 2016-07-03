@@ -106,9 +106,9 @@
 
 							<tr ng-repeat="player in tournamentPlayerList | orderBy:['group','-tournamentpoints','name']"
 									ng-class="{'info' : (player.group == selectedTournament.groups[0].groupname || player.group == selectedTournament.groups[4].groupname),
-												'success' : (player.group == selectedTournament.groups[1].groupname || player.group == selectedTournament.groups[5].groupname)),
-												'warning' : (player.group == selectedTournament.groups[2].groupname || player.group == selectedTournament.groups[6].groupname)),
-												'danger' : (player.group == selectedTournament.groups[3].groupname || player.group == selectedTournament.groups[7].groupname))}">
+												'success' : (player.group == selectedTournament.groups[1].groupname || player.group == selectedTournament.groups[5].groupname),
+												'warning' : (player.group == selectedTournament.groups[2].groupname || player.group == selectedTournament.groups[6].groupname),
+												'danger' : (player.group == selectedTournament.groups[3].groupname || player.group == selectedTournament.groups[7].groupname)}">
 								<td align="center" width="5%">
 									<strong>
 										{{ ( (selectedTournament.groups.length == 0) ? $index+1 : '' ) }}
