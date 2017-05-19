@@ -1,3 +1,6 @@
+body {
+	padding-top: 50px;
+}
 .player-selected {
 	font-weight: bold;
 }
@@ -18,6 +21,25 @@
 }
 .ng-valid.ng-dirty {
   border-color: #78FA89;
+}
+.panel-heading {
+	padding: 1px 10px;
+	text-align: center;
+}
+.header {
+  background-color: white;
+  border-bottom: solid 2px #999;
+  height: 50px;
+}
+.header .dropdown {
+	margin: 8px;
+}
+.catlogo {
+	padding-left: 10px;
+	padding-top: 3px;
+}
+.label {
+	display: inline-block;
 }
 .table-brackets tbody tr td {
 	padding: 8px 0 8px 0;

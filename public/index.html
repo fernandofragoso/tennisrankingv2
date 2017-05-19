@@ -22,21 +22,36 @@
 
 			</div>
 
-			<ul class="nav nav-tabs" style="margin-bottom:10px;" ng-controller="PageController">
-				<li id="tab_tournaments" role="presentation" class="active"><a ng-click="showTab(2)">Torneios</a></li>
-				<li id="tab_ranking" role="presentation"><a ng-click="showTab(1)">Ranking Geral</a></li>
-				<!-- <li id="tab_blog" role="presentation" class="pull-right"><a href="http://www.catenis.com.br/blog">CATenis.com.br</a> -->
-				<li id="tab_login" ng-show="(session.data)" role="presentation" class="pull-right">
-					<a ng-click="logout()" href="#">(Logout)</a></li>
-				<li id="tab_login" ng-hide="(session.data)" role="presentation" class="pull-right"><a href="/#/login">Login</a></li>
-			</ul>
+			<div class="header navbar-fixed-top">
+				<div class="catlogo pull-left">
+					<img src="img/catlogo.png" style='height:40px'>
+					<img src="img/catrecifetour.png" style='height:35px'>
+				</div>
+				<div class="dropdown pull-right">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Menu
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" ng-controller="PageController">
+						<li><a href="javascript:void(0)" ng-click="showTab(2)">Torneios</a></li>
+						<li><a href="javascript:void(0)" ng-click="showTab(1)">Ranking Geral</a></li>
+						<li><a href="http://www.catenis.com.br/blog/regulamento" target="_blank">Regulamento</a></li>
+						<li role="separator" class="divider"></li>
+						<li id="tab_login" ng-show="(session.data)" role="presentation">
+							<a ng-click="logout()" href="javascript:void(0)">(Logout)</a>
+						</li>
+						<li id="tab_login" ng-hide="(session.data)" role="presentation">
+							<a href="/#/login">Login</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 
 			<div id="div_tournaments" ng-controller="TournamentController">
 
 			 	<div class="panel panel-default">
 
 					<div class="panel-heading">
-						<img src="img/trophy.png" style="width: 55px;height:55px;float:left;margin-right:10px">
 						<h3>Torneios</h3>
 					</div>
 					<div class="panel-body">
@@ -74,7 +89,6 @@
 				<div class="panel panel-default">
 
 					<div id="tournmatches" class="panel-heading">
-						<img src="img/picture.jpg" style="width: 55px;height:55px;float:left;margin-right:10px">
 						<h3>{{selectedTournament.name}}</h3>
 					</div>
 					<div class="panel-body">
@@ -383,7 +397,6 @@
 				<div class="panel panel-default">
 
 					<div class="panel-heading">
-						<img src="img/icon.png" style="width: 55px;height:55px;float:left;margin-right:10px">
 						<h3>Ranking Geral</h3>
 					</div>
 					<div class="panel-body">
@@ -435,7 +448,6 @@
 				<div class="panel panel-default">
 
 					<div id="matches" class="panel-heading">
-						<img src="img/picture.jpg" style="width: 55px;height:55px;float:left;margin-right:10px">
 						<h3>{{selectedPlayer.name}}</h3>
 					</div>
 					<div class="panel-body">
