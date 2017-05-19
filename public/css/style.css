@@ -41,6 +41,11 @@ body {
 .label {
 	display: inline-block;
 }
+.label-score {
+	width: 20px;
+	padding: 5px 0px;
+	margin-right: 2px;
+}
 .table-brackets tbody tr td {
 	padding: 8px 0 8px 0;
 }
