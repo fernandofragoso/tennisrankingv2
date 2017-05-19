@@ -346,26 +346,26 @@
 							ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'list-group-item-custom' : 'list-group-item-warning'">
 
 							<tr>
-								<td width="10%" rowspan="2" style="text-align:center;vertical-align:middle">
+								<td width="30px" rowspan="2" style="text-align:center;vertical-align:middle">
 									<small>{{match.round}}</small><small ng-show="match.bracket_b"><br />(B)</small>
 								</td>
-								<td width="60%" style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
-									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
+								<td style="vertical-align:middle" ng-class="(fullMatch.player1 == selectedPlayer.id) ? 'player-selected' : ''">
+									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label label-score">
 										{{ (match.score.wo) ? ((match.score.set_p1!=0) ? "w" : "O") : match.score.set_p1 }}</span>
 									<span style='white-space:nowrap'>{{getPlayerName(match.p1_id)}}</span>
 								</td>
-								<td width="30%" align="right" style="vertical-align:middle">
-									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p1}}</span>
+								<td width="80px" align="right" style="vertical-align:middle">
+									<span ng-repeat="game in match.score.games" class="label label-default label-score">{{game.game_p1}}</span>
 								</td>
 							</tr>
 							<tr>
 								<td style="vertical-align:middle" ng-class="(fullMatch.player2 == selectedPlayer.id) ? 'player-selected' : ''">
-									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label">
+									<span ng-class="(match.score.set_p1==0 && match.score.set_p2==0) ? 'label-default' : 'label-warning'" class="label label-score">
 										{{ (match.score.wo) ? ((match.score.set_p2!=0) ? "w" : "O") : match.score.set_p2 }}</span>
 									<span style='white-space:nowrap'>{{getPlayerName(match.p2_id)}}</span>
 								</td>
 								<td align="right" style="vertical-align:middle">
-									<span ng-repeat="game in match.score.games" class="label label-default" style="margin-right:5px">{{game.game_p2}}</span>
+									<span ng-repeat="game in match.score.games" class="label label-default label-score">{{game.game_p2}}</span>
 								</td>
 							</tr>
 							<tr ng-show="(session.data)">
