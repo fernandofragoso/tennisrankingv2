@@ -49,43 +49,6 @@
 
 			<div id="div_tournaments" ng-controller="TournamentController">
 
-			 	<div class="panel panel-default">
-
-					<div class="panel-heading">
-						<h3>Torneios</h3>
-					</div>
-					<div class="panel-body">
-
-						<table class="table table-striped">
-
-							<tr class="h4">
-								<th>Torneio</th>
-								<th align="center" width="10%"></th>
-							</tr>
-
-							<tr id="loadingtournaments" ng-hide="listLoaded">
-								<td colspan="4" align="center">
-									<img src="img/ajax-loader.gif">
-								</td>
-							</tr>
-
-							<tr ng-repeat="tourn in tournList | orderBy:'-_id'" ng-init="checkRunning(tourn)" ng-click="filterTournamentMatches(tourn._id)">
-								<td>
-									<a href="">{{tourn.name}}</a>
-								</td>
-								<td align="right">
-									<a ng-show="(session.data)" ng-href="/#/matches/{{tourn._id}}" class="btn btn-primary btn-xs">
-										Adicionar partida
-									</a>
-								</td>
-							</tr>
-
-						</table>
-
-					</div>
-
-				</div>
-
 				<div class="panel panel-default">
 
 					<div id="tournmatches" class="panel-heading">
@@ -386,6 +349,43 @@
 							</tr>
 
 						</table>
+					</div>
+
+				</div>
+
+				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<h3>Outros Torneios</h3>
+					</div>
+					<div class="panel-body">
+
+						<table class="table table-striped">
+
+							<tr class="h4">
+								<th>Torneio</th>
+								<th align="center" width="10%"></th>
+							</tr>
+
+							<tr id="loadingtournaments" ng-hide="listLoaded">
+								<td colspan="4" align="center">
+									<img src="img/ajax-loader.gif">
+								</td>
+							</tr>
+
+							<tr ng-repeat="tourn in tournList | orderBy:'-_id'" ng-init="checkRunning(tourn)" ng-click="filterTournamentMatches(tourn._id)">
+								<td>
+									<a href="">{{tourn.name}}</a>
+								</td>
+								<td align="right">
+									<a ng-show="(session.data)" ng-href="/#/matches/{{tourn._id}}" class="btn btn-primary btn-xs">
+										Adicionar partida
+									</a>
+								</td>
+							</tr>
+
+						</table>
+
 					</div>
 
 				</div>
