@@ -114,8 +114,6 @@ rankingApp.controller("MatchController",['$scope','$window','$routeParams', func
 
 	$scope.submit = function(){
 
-		console.log("match controller: " + JSON.stringify(this.match));
-
 		//if (this.match.p1_id) {
 			$scope.p1_id = this.match.p1_id;
 			$scope.p2_id = this.match.p2_id;

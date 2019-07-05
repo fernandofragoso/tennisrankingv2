@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var favicon = require('serve-favicon');
 var flash = require('connect-flash');
 var passport = require('passport');
+var cors = require('cors');
 
 //ROUTER
 // app.get('/', function(req, res){
@@ -26,11 +27,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
+// app.use(function(rveq, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+
+app.use(cors());
 
 //BRAGA WIN
 app.use(express.static(path.join(__dirname, "public")));

@@ -25,11 +25,12 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 		$scope.clearLists();
 
 		$scope.Tournament.get({id:tournamentId}, function(data){
+
 			$scope.selectedTournament = data;
 
 			$scope.tournamentMatchList = $scope.selectedTournament.matches;
 
-			$scope.filterTournamentPlayers();
+			$scope.filterTournamentPlayers(tournamentId);
 
 			$scope.updateRanking();
 
@@ -43,7 +44,6 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 
 	//FILTER PLAYERS PER TOURNAMENT
 	$scope.filterTournamentPlayers = function(tournamentId){
-		console.log("filterTournamentPlayers");
 
 		for (var i = 0; i<$scope.playerList.length; i++){
 			if ($scope.selectedTournament.players.indexOf($scope.playerList[i]._id)!=-1){
@@ -70,7 +70,6 @@ rankingApp.controller("TournamentController",['$scope','$timeout','$resource', f
 
 	//CLEAR LISTS
 	$scope.clearLists = function(){
-		console.log("clearLists");
 
 		while ($scope.tournamentPlayerList.length > 0){
 			$scope.tournamentPlayerList.pop();

@@ -66,6 +66,10 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 		});
 	});
 
+	$scope.getActivePlayerList = function() {
+		return $scope.playerList.filter(player => !player.disabled);
+	}
+
 	$scope.getCounter = function(num) {
 	    return new Array(num);
 	}
@@ -90,12 +94,12 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 
     $scope.updatePlayerList = function(callback){
     	$scope.Player.query(function(data){
-			$scope.playerList = data;
-			$scope.Tournament.query(function(data){
-				$scope.tournList = data;
-				callback();
+				$scope.playerList = data;
+				$scope.Tournament.query(function(data){
+					$scope.tournList = data;
+					callback();
+				});
 			});
-		});
     };
 
     $scope.getMatchCount = function(playerId){
@@ -369,6 +373,15 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 
 	};
 
+	$scope.getTournPlayers = function(tournId) {
+
+		var tournament = $scope.tournList.filter(tourn => tourn._id === tournId)[0];
+		return $scope.playerList.filter((player) => {
+			// console.log(player._id);
+			return tournament.players.includes(player._id);
+		});
+	}
+
 	//GET TOURNAMENT NAME
 	$scope.checkTournament = function(match) {
 
@@ -412,7 +425,7 @@ rankingApp.controller("RankingController",['$scope','$timeout','$resource', '$lo
 
 	// };
 
-	// //FILTER PLAYERS PER TOURNAMENT
+	//FILTER PLAYERS PER TOURNAMENT
 	// $scope.filterTournamentPlayers = function(tournamentId){
 	// 	console.log("filterTournamentPlayers");
 
