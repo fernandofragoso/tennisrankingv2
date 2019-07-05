@@ -8,7 +8,8 @@ var schema = new Schema({
 	phone: String,
 	email: String,
 	points: Number,
-	matches: []
+	matches: [],
+	disabled: Boolean
 });
 
 //EXPORTS

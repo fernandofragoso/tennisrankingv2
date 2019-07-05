@@ -19,7 +19,7 @@ router.route('/players')
 			if(err){
 				res.send(err);
 			} else {
-				res.json(rows);
+				res.json(rows.filter(() => rows.disabled !== false));
 			}
 		});
 	})
@@ -258,104 +258,6 @@ router.route('/matches/:id')
 		});
 
 	});
-
-//POPULATE DB - PLAYERS
-var populateDB = function(){
-	var players = [
-		{
-		"name": "Fernando Fragoso",
-		"email": "fernandofragoso@gmail.com",
-		"phone": "8848-2529",
-		"points": 0
-	},
-	{
-		"name": "Pedro Duarte",
-		"email": "pedrocpi@hotmail.com",
-		"phone": "9218-6199",
-		"points": 0
-	},
-	{
-		"name": "Ricardo Vasconcelos",
-		"email": "ricardovasc@gmail.com",
-		"phone": "8891-0255",
-		"points": 0
-	},
-	{
-		"name": "Luiz Henrique",
-		"email": "lluizhcs@gmail.com",
-		"phone": "8839-0437",
-		"points": 0
-	},
-	{
-		"name": "Emmanuel Costa",
-		"email": "",
-		"phone": "9587-0444",
-		"points": 0
-	},
-	{
-		"name": "João Costa",
-		"email": "joao@costanordeste.com.br",
-		"phone": "8773-0054",
-		"points": 0
-	},
-	{
-		"name": "Thiago Vasconcelos",
-		"email": "tgouveia91@hotmail.com",
-		"phone": "8838-4281",
-		"points": 0
-	},
-	{
-		"name": "Adalberto Guerra",
-		"email": "",
-		"phone": "8662-3164",
-		"points": 0
-	},
-	{
-		"name": "Bruno Sette",
-		"email": "brunosette@gmail.com",
-		"phone": "8254-9030",
-		"points": 0
-	},
-	{
-		"name": "Victor Cruz",
-		"email": "victorazevedocruz@gmail.com",
-		"phone": "9992-3703",
-		"points": 0
-	}
-	];
-
-	// Player.create(players, function(err){
-	// 	if(err){
-	// 		console.log(err);
-	// 	}
-	// });
-
-	var tournaments = [
-		{
-			"name":"Ranking 2014",
-			"running":false,
-			"players":[
-				"54908024bf00e1ce19a2a36e",
-				"54908024bf00e1ce19a2a36f",
-				"54908024bf00e1ce19a2a370",
-				"54908024bf00e1ce19a2a371",
-				"54908024bf00e1ce19a2a372",
-				"54908024bf00e1ce19a2a373",
-				"54908024bf00e1ce19a2a374",
-				"54908024bf00e1ce19a2a375",
-				"54908024bf00e1ce19a2a376",
-				"54908024bf00e1ce19a2a377"
-			]
-		}
-	];
-
-	// Tournament.create(tournaments, function(err){
-	// 	if(err){
-	// 		console.log(err);
-	// 	}
-	// });
-
-}
 
 //RETURN
 module.exports = router;

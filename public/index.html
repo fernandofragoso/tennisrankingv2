@@ -378,7 +378,7 @@
 									<a href="">{{tourn.name}}</a>
 								</td>
 								<td align="right">
-									<a ng-show="(session.data)" ng-href="/#/matches/{{tourn._id}}" class="btn btn-primary btn-xs">
+									<a ng-show="(session.data && tourn.running)" ng-href="/#/matches/{{tourn._id}}" class="btn btn-primary btn-xs">
 										Adicionar partida
 									</a>
 								</td>
@@ -419,7 +419,7 @@
 								</td>
 							</tr>
 
-							<tr ng-repeat="player in playerList | orderBy:['-points','name']" ng-click="filterPlayerMatches(player._id)">
+							<tr ng-repeat="player in getActivePlayerList() | orderBy:['-points','name']" ng-click="filterPlayerMatches(player._id)">
 								<td align="center"><strong>{{$index+1}}</strong></td>
 								<td>
 									<a href="">{{player.name}}</a>
