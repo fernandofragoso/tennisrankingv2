@@ -8,7 +8,7 @@
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "express": "^4.10.5",
-    "mongoose": "^4.1.9",
+    "mongoose": "^5.7.5",
     "node-restful": "^0.2.2",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
