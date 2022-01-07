@@ -42,7 +42,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 
 //MONGOOSE CONNECTION
 // mongoose.connect("mongodb://localhost/tennisapi",
-mongoose.connect('mongodb://heroku_app32612022:1aep7n66hoodpnpdsr4fpoi3g0@ds027741.mongolab.com:27741/heroku_app32612022',
+mongoose.connect('mongodb://catranking:catranking@cluster0-shard-00-00.svzro.mongodb.net:27017,cluster0-shard-00-01.svzro.mongodb.net:27017,cluster0-shard-00-02.svzro.mongodb.net:27017/catranking?ssl=true&replicaSet=atlas-4kdqbx-shard-0&authSource=admin&retryWrites=true&w=majority',
 	function(err){
 		if(err){
 			console.log("######## NO DB CONNECTION!! ######## " + err);
