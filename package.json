@@ -4,10 +4,10 @@
   "description": "Tennis Ranking API",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.10.0",
+    "body-parser": "^1.20.1",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
-    "express": "^4.10.5",
+    "express": "^4.18.2",
     "mongoose": ">=5.7.5",
     "node-restful": "^0.2.2",
     "passport": "^0.2.1",
